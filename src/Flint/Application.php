@@ -2,7 +2,8 @@
 
 namespace Flint;
 
-use Flint\Controller\ControllerResolver;
+use Flint\Provider\ControllerServiceProvider;
+use Silex\Provider\TwigServiceProvider;
 
 /**
  * @package Flint
@@ -21,10 +22,9 @@ class Application extends \Silex\Application
         parent::__construct();
 
         $this['root_dir'] = $rootDir;
-        $this['debug'] = $debug;
+        $this['debug']    = $debug;
 
-        $this['resolver'] = $this->share($this->extend('resolver', function ($resolver, $app) {
-            return new ControllerResolver($resolver, $app);
-        }));
+        $this->register(new ControllerServiceProvider);
+        $this->register(new TwigServiceProvider);
     }
 }
