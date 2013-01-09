@@ -1,0 +1,22 @@
+{
+    "name" : "henrikbjorn/flint",
+    "description" : "Enhanced Silex",
+    "license" : "MIT",
+    "authors" : [{
+        "name" : "Henrik Bjornskov",
+        "email" : "henrik@bjrnskov.dk"
+    }],
+    "require" : {
+        "silex/silex" : "1.0.*@dev"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Flint" : "src"
+        }
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "1.0.x-dev"
+        }
+    }
+}
