@@ -8,7 +8,7 @@ use Silex\Application;
 /**
  * @package Flint
  */
-class ControllerServiceProvider implements \Silex\ServiceProviderInterface
+class FlintServiceProvider implements \Silex\ServiceProviderInterface
 {
     /**
      * {@inheritDoc}

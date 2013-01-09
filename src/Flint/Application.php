@@ -2,7 +2,7 @@
 
 namespace Flint;
 
-use Flint\Provider\ControllerServiceProvider;
+use Flint\Provider\FlintServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 
 /**
@@ -21,10 +21,9 @@ class Application extends \Silex\Application
     {
         parent::__construct();
 
-        $this['root_dir'] = $rootDir;
-        $this['debug']    = $debug;
-
-        $this->register(new ControllerServiceProvider);
-        $this->register(new TwigServiceProvider);
+        $this->register(new FlintServiceProvider, array(
+            'debug'    => $debug,
+            'root_dir' => $rootDir,
+        ));
     }
 }
