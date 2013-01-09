@@ -11,6 +11,11 @@ class Application extends ObjectBehavior
         $this->beConstructedWith(sys_get_temp_dir());
     }
 
+    function it_extends_silex()
+    {
+        $this->shouldBeAnInstanceOf('Silex\Application');
+    }
+
     function it_defaults_to_false_for_debug()
     {
         $this->raw('debug')->shouldReturn(false);
