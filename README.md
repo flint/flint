@@ -20,7 +20,7 @@ $app->get('/my/route/{param}', 'My\\Custom\\Controller::indexAction');
 $app->run();
 ```
 
-### Symfony like controllers
+### Controllers like a Boss
 
 Flint contains a base controller like the one found in FrameworkBundle, just not with all the helper
 methods (yet).
@@ -38,8 +38,11 @@ class DefaultController extends \Flint\Controller\Controller
 {
     public function indexAction()
     {
-        return $this->app['twig']->render('template.html.twig');
+        return $this->render('template.html.twig');
     }
 }
 ```
 
+### Configurations from json file(s)
+
+Remains to be done
