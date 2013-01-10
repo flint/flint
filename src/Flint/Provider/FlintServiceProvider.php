@@ -2,6 +2,7 @@
 
 namespace Flint\Provider;
 
+use Flint\Listener\ExceptionListener;
 use Flint\Controller\ControllerResolver;
 use Silex\Application;
 
@@ -17,6 +18,10 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
     {
         $app['resolver'] = $app->share($app->extend('resolver', function ($resolver, $app) {
             return new ControllerResolver($resolver, $app);
+        }));
+
+        $app['exception_handler'] = $app->share($app->extend('exception_handler', function ($handler, $app) {
+            return new ExceptionListener('Flint\\Controller\\ExceptionController::showAction', $handler);
         }));
     }
 
