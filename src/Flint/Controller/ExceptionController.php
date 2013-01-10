@@ -53,7 +53,6 @@ class ExceptionController extends Controller
             'Exception/error' . $code . '.' . $format . '.twig',
             'Exception/error.' . $format . '.twig',
             'Exception/error.html.twig',
-            '@Flint/Exception/error' . $code . '.' . $format . '.twig',
             '@Flint/Exception/error.' . $format . '.twig',
             '@Flint/Exception/error.html.twig',
         );
