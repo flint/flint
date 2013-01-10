@@ -1,10 +1,17 @@
 Flint
 =====
 
-[![Build Status](https://travis-ci.org/henrikbjorn/flint.png?branch=master)](https://travis-ci.org/henrikbjorn/flint)
+![Flint](http://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Miorcani_flint.jpg/220px-Miorcani_flint.jpg)
 
 Flint is an enhanced version of Silex. It adds a more Symfony'ish way of using Controllers aswell as Application injection
 into Controllers implementing the `ApplicationAwareInterface`.
+
+Testing
+-------
+
+Flint is tested with PHPSpec2 and Travis-CI.
+
+[![Build Status](https://travis-ci.org/henrikbjorn/flint.png?branch=master)](https://travis-ci.org/henrikbjorn/flint)
 
 Usage
 -----
