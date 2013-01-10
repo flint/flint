@@ -23,6 +23,12 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
         $app['exception_handler'] = $app->share(function ($app) {
             return new ExceptionListener('Flint\\Controller\\ExceptionController::showAction', $app['logger']);
         });
+
+        $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
+            $loader->addPath(__DIR__ . '/../Resources/views', 'Flint');
+
+            return $loader;
+        }));
     }
 
     /**
