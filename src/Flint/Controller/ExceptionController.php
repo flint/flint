@@ -4,10 +4,17 @@ namespace Flint\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @package Flint
+ */
 class ExceptionController extends Controller
 {
-    public function showAction(Request $request)
+    /**
+     * @param Request $request
+     * @param string $format
+     */
+    public function showAction(Request $request, $format)
     {
-        return 'I am an error';
+        return $format;
     }
 }
