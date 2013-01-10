@@ -4,13 +4,6 @@ Flint
 Flint is an enhanced version of Silex. It adds a more Symfony'ish way of using Controllers aswell as Application injection
 into Controllers implementing the `ApplicationAwareInterface`.
 
-Todo
-----
-
-- [ ] `src/Flint/Resources/views` needs to be appended to the paths Twig uses for search. But must be the last added path (fallback).
-- [ ] Configuration files.
-- [ ] Use a xml file for routing.
-
 Usage
 -----
 
