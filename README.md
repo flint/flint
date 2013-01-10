@@ -50,6 +50,12 @@ class DefaultController extends \Flint\Controller\Controller
 }
 ```
 
+### Pretty error pages
+
+Symfony have a nice feature where it can render a nice error page with twig. This is not in Silex per default.
+Flint uses the default `ExceptionListener` and implements an `ExceptionController` which looks for error templates
+in `views/Exception`. The logic for when to get what template is the same as specified in the symfony cookbook.
+
 ### Configurations from json file(s)
 
 Remains to be done

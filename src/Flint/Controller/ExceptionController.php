@@ -54,7 +54,7 @@ class ExceptionController extends Controller
         $templates = array(
             'Exception/error' . $code . '.' . $format . '.twig',
             'Exception/error.' . $format . '.twig',
-            'Exception/error.twig',
+            'Exception/error.html.twig',
         );
 
         foreach ($templates as $template) {
