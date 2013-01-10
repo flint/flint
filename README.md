@@ -58,6 +58,8 @@ Symfony have a nice feature where it can render a nice error page with twig. Thi
 Flint uses the default `ExceptionListener` and implements an `ExceptionController` which looks for error templates
 in `views/Exception`. The logic for when to get what template is the same as specified in the symfony cookbook.
 
+The default error templates are taken from Symfony.
+
 ### Configurations from json file(s)
 
 Remains to be done
