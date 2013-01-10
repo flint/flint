@@ -19,11 +19,12 @@ class Application extends \Silex\Application
      */
     public function __construct($rootDir, $debug = false)
     {
-        parent::__construct();
-
-        $this->register(new FlintServiceProvider, array(
-            'debug'    => $debug,
+        parent::__construct(array(
             'root_dir' => $rootDir,
+            'debug' => $debug,
         ));
+
+        $this->register(new TwigServiceProvider);
+        $this->register(new FlintServiceProvider);
     }
 }
