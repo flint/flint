@@ -6,17 +6,19 @@
         "name" : "Henrik Bjornskov",
         "email" : "henrik@bjrnskov.dk"
     }],
-    "require" : {
-        "silex/silex" : "1.0.*@dev"
-    },
-    "require-dev" : {
-        "phpspec/phpspec2" : "dev-develop",
-        "phpspec/php-diff" : "dev-master"
-    },
     "autoload" : {
         "psr-0" : {
             "Flint" : "src"
         }
+    },
+    "require" : {
+        "php" : ">=5.3.3",
+        "silex/silex" : "1.0.*@dev",
+        "twig/twig" : "~1.0"
+    },
+    "require-dev" : {
+        "phpspec/phpspec2" : "dev-develop",
+        "phpspec/php-diff" : "dev-master"
     },
     "extra" : {
         "branch-alias" : {
