@@ -29,14 +29,15 @@ $app->get('/my/route/{param}', 'My\\Custom\\Controller::indexAction');
 $app->run();
 ```
 
-A Flint `Application` is a extension of Silex Application. It adds `TwigServiceProvider`
-because the error handling depends on it. Also it registers `FlintServiceProvider`.
-
 The application constructor parameters are alvailable as parameters from the application
 as:
 
 * `root_dir`
 * `debug`
+
+### Built in Service providers
+
+* TwigServiceProvider
 
 ### Controllers like a Boss
 
