@@ -81,6 +81,8 @@ Normally this would be set like so:
 $app['routing.resource'] = 'routing.xml';
 ```
 
+The loader will look in `%root_dir%/config`.
+
 ### Configurations from json file(s)
 
 Remains to be done
