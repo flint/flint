@@ -62,6 +62,21 @@ class DefaultController extends \Flint\Controller\Controller
 }
 ```
 
+### Setting configuration values
+
+To ease setting configuration values the Application implements a `inject` method that takes an array of key
+value pairs. Theese are set on the containter exactly like the second argument to `register`
+
+``` php
+<?php
+
+$app->inject(array(
+    'twig.path' => '/my/path',
+));
+
+echo $app['twig.path']; // Would echo: /my/path
+```
+
 ### Pretty error pages
 
 Symfony have a nice feature where it can render a nice error page with twig. This is not in Silex per default.

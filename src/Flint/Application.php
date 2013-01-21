@@ -31,4 +31,14 @@ class Application extends \Silex\Application
         $this->register(new ConfigServiceProvider);
         $this->register(new RoutingServiceProvider);
     }
+
+    /**
+     * @param array $parameters
+     */
+    public function inject(array $parameters)
+    {
+        foreach ($parameters as $k => $v) {
+            $this[$k] = $v;
+        }
+    }
 }
