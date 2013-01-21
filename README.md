@@ -69,6 +69,27 @@ in `views/Exception`. The logic for when to get what template is the same as spe
 
 The default error templates are taken from Symfony.
 
+### Routing as xml files
+
+Some times it is better to have a single config files for routes and not have them scattered in different places.
+
+Flint allows this by adding a service for `XmlFileLoader` and by default it will try and load a `routing.xml` file
+located in `%root_dir%/config/routing.xml`.
+
+The xml file specification can be found in the Symfony documentation.
+
+There is loaders added for php aswell. Also if `Yaml` component is available that loader is also loaded. If you
+want to custom load a file:
+
+``` php
+<?php
+
+$collection = $app['routing.loader']->load('routing.{yml,php,xml}');
+
+$app['routes']->addCollection($colleciton');
+```
+
+
 ### Configurations from json file(s)
 
 Remains to be done
