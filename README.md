@@ -86,7 +86,7 @@ want to custom load a file:
 
 $collection = $app['routing.loader']->load('routing.{yml,php,xml}');
 
-$app['routes']->addCollection($colleciton');
+$app['routes']->addCollection($collection);
 ```
 
 
