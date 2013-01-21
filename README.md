@@ -32,7 +32,7 @@ $app->run();
 The application constructor parameters are alvailable as parameters from the application
 as:
 
-* `root_dir`
+* `root\_dir`
 * `debug`
 
 ### Built in Service providers
@@ -70,26 +70,16 @@ in `views/Exception`. The logic for when to get what template is the same as spe
 
 The default error templates are taken from Symfony.
 
-### Routing as xml files
+### Routing as config file
 
-Some times it is better to have a single config files for routes and not have them scattered in different places.
-
-Flint allows this by adding a service for `XmlFileLoader` and by default it will try and load a `routing.xml` file
-located in `%root_dir%/config/routing.xml`.
-
-The xml file specification can be found in the Symfony documentation.
-
-There is loaders added for php aswell. Also if `Yaml` component is available that loader is also loaded. If you
-want to custom load a file:
+Flint enables usage of `routing.{yml,php,xml}` files by adding a `routing.resource` that will be auto loaded.
+Normally this would be set like so:
 
 ``` php
 <?php
 
-$collection = $app['routing.loader']->load('routing.{yml,php,xml}');
-
-$app['routes']->addCollection($collection);
+$app['routing.resource'] = 'routing.xml';
 ```
-
 
 ### Configurations from json file(s)
 

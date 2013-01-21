@@ -31,18 +31,4 @@ class Application extends \Silex\Application
         $this->register(new ConfigServiceProvider);
         $this->register(new RoutingServiceProvider);
     }
-
-    /**
-     * Loads routing.xml from config directory.
-     * 
-     * @param string $prefix
-     */
-    public function flush($prefix = '')
-    {
-        parent::flush($prefix);
-
-        $collection = $this['routing.loader']->load('routing.xml');
-
-        $this['routes']->addCollection($collection);
-    }
 }

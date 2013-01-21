@@ -19,6 +19,8 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        $app['routing.resource'] = null;
+
         $app['routing.loader.xml'] = $app->share(function (Application $app) {
             return new XmlFileLoader($app['config.locator']);
         });
@@ -54,5 +56,9 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
+        if ($app['routing.resource']) {
+            $collection = $app['routing.loader']->load($app['routing.resource']);
+            $app['routes']->addCollection($collection);
+        }
     }
 }
