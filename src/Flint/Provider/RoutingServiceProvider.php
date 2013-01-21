@@ -58,6 +58,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
     {
         if ($app['routing.resource']) {
             $collection = $app['routing.loader']->load($app['routing.resource']);
+
             $app['routes']->addCollection($collection);
         }
     }
