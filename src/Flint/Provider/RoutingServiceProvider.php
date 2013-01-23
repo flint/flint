@@ -2,7 +2,9 @@
 
 namespace Flint\Provider;
 
+use Flint\Routing\NullLoader;
 use Silex\Application;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
@@ -33,10 +35,15 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             return new YamlFileLoader($app['config.locator']);
         });
 
+        $app['routing.loader.null'] = $app->share(function (Application $app) {
+            return new NullLoader;
+        });
+
         $app['routing.loader.resolver'] = $app->share(function (Application $app) {
             $loaders = array(
                 $app['routing.loader.xml'],
                 $app['routing.loader.php'],
+                $app['routing.loader.null'],
             );
 
             if (class_exists('Symfony\Component\Yaml\Yaml')) {
@@ -49,6 +56,23 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
         $app['routing.loader'] = $app->share(function (Application $app) {
             return new DelegatingLoader($app['routing.loader.resolver']);
         });
+
+        $app['routing.options'] = function (Application $app) {
+            return array(
+                'debug'         => $app['debug'],
+                'matcher_class' => 'Silex\RedirectableUrlMatcher',
+            );
+        };
+
+        $app['router'] = $app->share(function (Application $app) {
+            return new Router($app['routing.loader'], $app['routing.resource'], $app['routing.options'], $app['request_context'], $app['logger']);
+        });
+
+        $app['routes'] = function (Application $app) {
+            return $app['router']->getRouteCollection();
+        };
+
+        $app['url_matcher'] = $app->raw('router');
     }
 
     /**
@@ -56,10 +80,5 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        if ($app['routing.resource']) {
-            $collection = $app['routing.loader']->load($app['routing.resource']);
-
-            $app['routes']->addCollection($collection);
-        }
     }
 }
