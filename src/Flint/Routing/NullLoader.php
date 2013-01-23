@@ -5,6 +5,10 @@ namespace Flint\Routing;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
+ * When `routing.resource` is null a loader needs to support that.
+ * This just returns an empty RouteCollection so an exception will
+ * not be raised and to keep BC with Silex.
+ *
  * @package Flint
  */
 class NullLoader extends \Symfony\Component\Config\Loader\Loader
