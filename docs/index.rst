@@ -16,7 +16,9 @@ Basic usage
 
 Flint uses a ``root_dir`` and a ``debug`` parameter as one of the essential things.
 In various providers you create this can be very useful, especially the ``root_dir`` for
-configuration for Twig and so on. This is also why both are required constructor parameters::
+configuration for Twig and so on. This is also why both are required constructor parameters.
+
+.. code-block:: php
 
     <?php
 
@@ -29,7 +31,9 @@ Injecting parameters
 --------------------
 
 To make injecting parameters easier Flint implements a ``inject`` method that takes an array of
-key, values and sets them on the application::
+key, values and sets them on the application.
+
+.. code-block:: php
 
     <?php
 

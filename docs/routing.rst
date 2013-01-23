@@ -16,7 +16,9 @@ Caching generated routes
 This also triggers a replacement of the default ``UrlMatcher`` into a real ``RouterInterface`` implementation.
 This have the benefit of having access to a ``UrlGenerator`` and caching.
 
-To enable caching and having a resource loaded::
+To enable caching and having a resource loaded.
+
+.. code-block:: php
 
     <?php
 

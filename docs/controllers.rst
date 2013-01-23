@@ -6,7 +6,9 @@ Using a base controller
 
 Flint makes it easy to have controllers behave like in Symfony. This is done by having a 
 base controller ``Flint\Controller\Controller`` which implements most of the methods
-found in the base controller from Symfony::
+found in the base controller from Symfony
+
+.. code-block:: php
 
     <?php
 
