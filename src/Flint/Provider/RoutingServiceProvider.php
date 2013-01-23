@@ -22,6 +22,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
     public function register(Application $app)
     {
         $app['routing.resource'] = null;
+        $app['routing.options'] = array();
 
         $app['routing.loader.xml'] = $app->share(function (Application $app) {
             return new XmlFileLoader($app['config.locator']);
@@ -57,14 +58,12 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             return new DelegatingLoader($app['routing.loader.resolver']);
         });
 
-        $app['routing.options'] = function (Application $app) {
-            return array(
-                'debug'         => $app['debug'],
-                'matcher_class' => 'Silex\RedirectableUrlMatcher',
-            );
-        };
-
         $app['router'] = $app->share(function (Application $app) {
+            $options = array_merge(array(
+                'debug' => $app['debug'],
+                'matcher_class' => 'Silex/RedirectableUrlMatcher',
+            ), $app['routing.options']);
+
             return new Router($app['routing.loader'], $app['routing.resource'], $app['routing.options'], $app['request_context'], $app['logger']);
         });
 
