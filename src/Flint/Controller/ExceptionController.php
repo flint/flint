@@ -29,11 +29,13 @@ class ExceptionController extends Controller
         $template = $this->resolve($request, $code, $format);
 
         if ($template) {
-            return $this->app['twig']->render($template, array(
+            $contents =  $this->app['twig']->render($template, array(
                 'status_code'    => $code,
                 'status_text'    => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
                 'exception'      => $exception,
             ));
+
+            return new Response($contents, $code);
         }
 
         return $handler->createResponse($exception);
@@ -60,6 +62,10 @@ class ExceptionController extends Controller
         foreach ($templates as $template) {
             if (false == $loader->exists($template)) {
                 continue;
+            }
+
+            if (strpos($template, '.html.twig')) {
+                $request->setRequestFormat('html');
             }
 
             return $template;
