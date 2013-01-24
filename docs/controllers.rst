@@ -39,3 +39,22 @@ The base controller gets the ``Application`` injected into it because it impleme
 special interface called ``Flint\ApplicationAwareInterface``. The default behaviour
 with injecting the ``Application`` or ``Request`` is kept intact if they are typehinted
 in the actions parameters.
+
+.. code-block:: php
+
+    <?php
+
+    namespace Skeleton\Controller;
+
+    use Flint\Application;
+    use Flint\Controller\Controller;
+    use Symfony\Component\HttpFoundation\Request;
+
+    class DefaultController extends Controller
+    {
+        public function indexAction(Request $request, Application $app)
+        {
+            // Request is injected when method is called by ControllerResolver
+            // Application is also injected.
+        }
+    }
