@@ -16,12 +16,18 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['resolver'] = $app->share($app->extend('resolver', function ($resolver, $app) {
-            return new ControllerResolver($resolver, $app);
-        }));
-
         $app['exception_handler'] = $app->share(function ($app) {
             return new ExceptionListener('Flint\\Controller\\ExceptionController::showAction', $app['logger']);
+        });
+
+        $app->extend('resolver', function ($resolver, $app) {
+            return new ControllerResolver($resolver, $app);
+        });
+
+        $app->extend('twig.loader.filesystem', function ($loader, $app) {
+            $loader->addPath(__DIR__ . '/../Resources/views', 'Flint');
+
+            return $loader;
         });
     }
 
@@ -30,10 +36,5 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
-            $loader->addPath(__DIR__ . '/../Resources/views', 'Flint');
-
-            return $loader;
-        }));
     }
 }

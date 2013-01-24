@@ -41,7 +41,7 @@ class FlintServiceProviderTest extends \PHPUnit_Framework_TestCase
         });
 
         $provider = new FlintServiceProvider;
-        $provider->boot($this->app);
+        $provider->register($this->app);
 
         $this->app['twig.loader.filesystem'];
     }
