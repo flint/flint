@@ -45,8 +45,6 @@ need to enable `UrlGeneratorServiceProvider` because ``RouterInterface`` creates
 
 The router is avaiable in Twig templates and on the application as a service.
 
-Twig:
-
 .. code-block:: jinja
 
     <a href="{{ app.router.generate('homepage') }}">Frontpage</a>
@@ -56,8 +54,6 @@ Twig:
     <a href="{{ path('homepage') }}">Frontpage</a>
 
     <a href="{{ url('homepage') }}">Absolute url to Frontpage</a>
-
-Controller:
 
 .. code-block:: php
 
