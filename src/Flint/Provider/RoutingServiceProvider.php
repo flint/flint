@@ -2,8 +2,8 @@
 
 namespace Flint\Provider;
 
-use Flint\Routing\NullLoader;
 use Silex\Application;
+use Flint\Routing\Loader\NullLoader;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;

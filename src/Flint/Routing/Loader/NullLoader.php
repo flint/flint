@@ -1,6 +1,6 @@
 <?php
 
-namespace Flint\Routing;
+namespace Flint\Routing\Loader;
 
 use Symfony\Component\Routing\RouteCollection;
 
