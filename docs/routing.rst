@@ -32,4 +32,37 @@ To enable caching and having a resource loaded.
 
     $app->run();
 
+Generate urls for named routes
+------------------------------
 
+Because Flint replaces the Routing system with a ``RouterInterface`` implementation there is no
+need to enable `UrlGeneratorServiceProvider` because ``RouterInterface`` creates one on demand.
+
+.. note::
+
+    This is only useable for routes that have been bound by using ``->bind`` or with routes that have
+    name loaded from a configuration file.
+
+The router is avaiable in Twig templates and on the application as a service.
+
+Twig:
+
+.. code-block:: jinja
+
+    <a href="{{ app.router.generate('homepage') }}">Frontpage</a>
+
+Controller:
+
+.. code-block:: php
+
+    <?php
+
+    namespace Skeleton\Controller;
+
+    class DefaultController
+    {
+        public function indexAction()
+        {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+    }
