@@ -15,8 +15,14 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        $app['config.paths'] = function (Application $app) {
+            return array(
+                $app['root_dir'] . '/config',
+            );
+        };
+
         $app['config.locator'] = $app->share(function (Application $app) {
-            return new FileLocator($app['root_dir'] . '/config');
+            return new FileLocator($app['config.paths']);
         });
     }
 
