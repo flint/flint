@@ -51,6 +51,12 @@ Twig:
 
     <a href="{{ app.router.generate('homepage') }}">Frontpage</a>
 
+    {# if Twig bridge is available #}
+
+    <a href="{{ path('homepage') }}">Frontpage</a>
+
+    <a href="{{ url('homepage') }}">Absolute url to Frontpage</a>
+
 Controller:
 
 .. code-block:: php

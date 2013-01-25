@@ -4,6 +4,7 @@ namespace Flint\Provider;
 
 use Silex\Application;
 use Flint\Routing\Loader\NullLoader;
+use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
@@ -72,6 +73,14 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
         };
 
         $app['url_matcher'] = $app->raw('router');
+
+        $app->extend('twig', function (\Twig_Environment $twig, Application $app) {
+            if (class_exists('Symfony\Bridge\Twig\Extension\RoutingExtension')) {
+                $twig->addExtension(new RoutingExtension($app['router']));
+            }
+
+            return $twig;
+        });
     }
 
     /**
