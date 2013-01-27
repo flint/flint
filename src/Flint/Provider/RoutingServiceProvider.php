@@ -64,7 +64,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
                 'matcher_class' => 'Silex/RedirectableUrlMatcher',
             ), $app['routing.options']);
 
-            return new Router($app['routing.loader'], $app['routing.resource'], $app['routing.options'], $app['request_context'], $app['logger']);
+            return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
         });
 
         $app['routes'] = function (Application $app) {
