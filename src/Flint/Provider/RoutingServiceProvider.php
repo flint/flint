@@ -59,10 +59,13 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
         });
 
         $app['router'] = $app->share(function (Application $app) {
-            $options = array_merge(array(
+            $defaults = array(
                 'debug' => $app['debug'],
                 'matcher_class' => 'Silex\\RedirectableUrlMatcher',
-            ), $app['routing.options']);
+                'matcher_base_class' => 'Silex\\RedirectableUrlMatcher',
+            );
+
+            $options = array_replace($defaults, $app['routing.options']);
 
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
         });
