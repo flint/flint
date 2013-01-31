@@ -47,7 +47,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
                 $app['routing.loader.null'],
             );
 
-            if (class_exists('Symfony\Component\Yaml\Yaml')) {
+            if (class_exists('Symfony\\Component\\Yaml\\Yaml')) {
                 $loaders[] = $app['routing.loader.yml'];
             }
 
@@ -61,7 +61,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
         $app['router'] = $app->share(function (Application $app) {
             $options = array_merge(array(
                 'debug' => $app['debug'],
-                'matcher_class' => 'Silex/RedirectableUrlMatcher',
+                'matcher_class' => 'Silex\\RedirectableUrlMatcher',
             ), $app['routing.options']);
 
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
