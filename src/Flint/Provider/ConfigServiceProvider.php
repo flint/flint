@@ -17,7 +17,8 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
     {
         $app['config.paths'] = function (Application $app) {
             return array(
-                $app['root_dir'] . '/config',
+                $app['root_dir'],
+                __DIR__ . '/../Resources',
             );
         };
 

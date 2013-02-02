@@ -24,7 +24,7 @@ To enable caching and having a resource loaded.
 
     $app = new Flint\Application(__DIR__, true);
     $app->inject(array(
-        'routing.resource' => $app['root_dir'] . '/config/routing.xml',
+        'routing.resource' => 'config/routing.xml',
         'routing.options' => array(
             'cache_dir' => $app['root_dir'] . '/cache/routing',
         ),
