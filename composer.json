@@ -1,22 +1,26 @@
 {
-    "name" : "henrikbjorn/flint",
+    "name"        : "henrikbjorn/flint",
     "description" : "Enhanced Silex",
-    "license" : "MIT",
+    "license"     : "MIT",
+
     "authors" : [{
-        "name" : "Henrik Bjornskov",
+        "name"  : "Henrik Bjornskov",
         "email" : "henrik@bjrnskov.dk"
     }],
+
     "autoload" : {
         "psr-0" : {
             "Flint" : "src"
         }
     },
+
     "require" : {
-        "php" : ">=5.3.3",
-        "silex/silex" : "1.0.*@dev",
-        "twig/twig" : "~1.0",
+        "php"            : ">=5.3.3",
+        "silex/silex"    : "1.0.*@dev",
+        "twig/twig"      : "~1.0",
         "symfony/config" : "~2.0"
     },
+
     "extra" : {
         "branch-alias" : {
             "dev-master" : "1.0.x-dev"
