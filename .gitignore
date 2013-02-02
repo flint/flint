@@ -1,5 +1,6 @@
 vendor
+coverage
+docs/_build
 composer.lock
 .DS_Store
-docs/_build
 phpunit.xml
