@@ -21,13 +21,10 @@ class ConfigServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $this->application['config.paths']);
     }
 
-    public function testConfigPathsContainsRootAndFlintResources()
+    public function testConfigPathsContainsRootConfigDirectory()
     {
         $this->provider->register($this->application);
-
-        $refl = new \ReflectionClass($this->provider);
-
+        $this->assertContains(__DIR__ . '/config', $this->application['config.paths']);
         $this->assertContains(__DIR__, $this->application['config.paths']);
-        $this->assertContains(dirname($refl->getFilename()) . '/../Resources', $this->application['config.paths']);
     }
 }
