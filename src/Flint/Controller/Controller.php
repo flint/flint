@@ -18,7 +18,7 @@ abstract class Controller extends \Flint\ApplicationAware
      * @param array $headers
      * @return Response
      */
-    protected function text($text, $statusCode = 200, array $headers = array())
+    public function text($text, $statusCode = 200, array $headers = array())
     {
         return new Response($text, $statusCode, $headers);
     }
@@ -34,7 +34,7 @@ abstract class Controller extends \Flint\ApplicationAware
     /**
      * @see Twig_Environment::render();
      */
-    protected function render($name, array $context = array())
+    public function render($name, array $context = array())
     {
         return $this->app['twig']->render($name, $context);
     }
@@ -42,7 +42,7 @@ abstract class Controller extends \Flint\ApplicationAware
     /**
      * @see Silex\Application::redirect()
      */
-    protected function redirect($url, $statusCode = 302)
+    public function redirect($url, $statusCode = 302)
     {
         return $this->app->redirect($url, $statusCode);
     }
@@ -50,7 +50,7 @@ abstract class Controller extends \Flint\ApplicationAware
     /**
      * @see Silex\Application::abort()
      */
-    protected function abort($statusCode, $message = '', array $headers = array())
+    public function abort($statusCode, $message = '', array $headers = array())
     {
         return $this->app->abort($statusCode, $message, $headers);
     }
@@ -59,7 +59,7 @@ abstract class Controller extends \Flint\ApplicationAware
      * @param string $id
      * @return boolean
      */
-    protected function has($id)
+    public function has($id)
     {
         return isset($this->app[$id]);
     }
@@ -68,7 +68,7 @@ abstract class Controller extends \Flint\ApplicationAware
      * @param string $id
      * @return mixed
      */
-    protected function get($id)
+    public function get($id)
     {
         return $this->app[$id];
     }
