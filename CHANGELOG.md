@@ -1,3 +1,13 @@
+1.0.3 / 2013-02-03 
+==================
+
+  * %root_dir%/config and %root_dir% are now registered as locations for config locator
+  * Ignore coverage directory
+  * Normalize visibility in Controller
+  * Ignore local phpunit.xml file
+  * Restructure composer file
+  * Add testcase for matcher and matcher_base_class
+  * Add .gitattributes file to make downloads slimmer
 
 1.0.2 / 2013-01-31 
 ==================
