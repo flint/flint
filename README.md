@@ -1,21 +1,21 @@
-Flint - The almost microframework
-=================================
+Flint
+=====
 
 [![Build Status](https://travis-ci.org/henrikbjorn/Flint.png?branch=master)](https://travis-ci.org/henrikbjorn/Flint)
 
 Flint is build on top of [Silex](http://silex.sensionlabs.org) and tries to bring structure, conventions and a couple of [Symfony](http://symfony.com) features.
 
-What is different (from Silex)
-------------------------------
+What is Different from Silex
+----------------------------
 
 Nothing and everything. Everything Silex does, Flint does aswell. This means that it is fully backwards compatible. So if closures are your thing, then dont stop using does but still get some benefit.
 
-* Uses a real `Router` instead of just the `UrlMatcher`. This gives the possiblity of caching for faster matching and generation.
-* Supports using `xml`, `yml` files for router configuration.
+* Uses the full router instead of the url matcher. This gives the more power to the developer.
+* Supports using `xml|yml|php` files for router configuration.
 * Custom `ControllerResolver` that knows how to inject your `Application` into controllers.
 * A base `Controller` with helper methods that matches the one found in [FrameworBundle](http://github.com/symfony/frameworkbundle).
-* Custom error pages by using the default `ExceptionHandler`.
-* Uses [Twig](http://twig.sensiolabs.org) by default for rendering.
+* Custom error pages by using the default exception handler from Symfony.
+* [Twig](http://twig.sensiolabs.org) is enabled by default.
 
 Getting started
 ---------------
@@ -134,10 +134,35 @@ inside your views.
 
 This is also possible with Silex but with a more verbose syntax.
 
-Documentation
--------------
+Error Pages
+-----------
 
-More documentation [can be found at flint.readthedocs.org](https://flint.readthedocs.org/).
+When finished a project or application it is the small things that matter the most. Such as having a custom error page instead of the one
+Silex provides by default. Also it can help a lost user navigate back. Flint makes this possible by using the exception handler from Symfony 
+and a dedicated controller. Both the views and the controller can be overrriden.
+
+This will only work when debug is turned off.
+
+To override the error pages the same logic is used as inside Symfony.
+The logic is very well described [in their documentation](http://symfony.com/doc/master/cookbook/controller/error_pages.html).
+
+Only difference from Symfony is the templates must be created inside `views/Excetion/` directory. Inside the templates there is
+access to `app` which in turns gives you access to all of the services defined. 
+
+To override the controller used by the exception handler change the `exception_controller` parameter. This parameter will by default
+be set to `Flint\\Controller\\ExceptionController::showAction`.
+
+``` php
+<?php
+
+// .. create $app
+$app->inject(array(
+    'exception_controller' => 'Acme\\Controller\\ExceptionController::showAction',
+));
+```
+
+To see what parameter the controller action takes look at the one provided by default. Normally it should not be overwritten as it already
+gives a lot of flexibilty with the template lookup.
 
 Feedback
 --------
