@@ -17,6 +17,31 @@ Nothing and everything. Everything Silex does, Flint does aswell. This means tha
 * Custom error pages by using the default `ExceptionHandler`.
 * Uses [Twig](http://twig.sensiolabs.org) by default for rendering.
 
+Getting started
+---------------
+
+For starting up a new project the easiest way is to use [Composer](http://getcomposer.org) and [Flint-Skeleton](http://github.com/henrikbjorn/flint-skeleton).
+
+``` bash
+$ php composer.phar create-project -s dev henrikbjorn/flint-skeleton my-flint-application
+```
+
+Or if you are migrating from a Silex project change your `composer.json` file to require Flint and change the Application class that is used.
+
+``` bash
+$ php composer.phar require henrikbjorn/flint:~1.0
+```
+
+``` php
+<?php
+
+use Flint\Application;
+
+$application = new Application($rootDir, $debug);
+```
+
+It is recommended to subclass `Flint\Application` instead of using the application class directly.
+
 Documentation
 -------------
 
