@@ -1,3 +1,10 @@
+1.0.4 / 2013-02-04 
+==================
+
+  * Add test for overriding exception controller
+  * Update documentation
+  * Allow to override the controller used for excetion handling
+
 1.0.3 / 2013-02-03 
 ==================
 
