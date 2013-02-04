@@ -87,6 +87,53 @@ class HelloController extends Controller
 }
 ```
 
+Routing
+-------
+
+Because Flint replaces the url matcher used in Symfony with the full router implementation a lot of new things is possible.
+
+Caching is one of thoose things. It makes your application faster as it does not need to register routes on every request.
+Together with loading your routes from a configuration file like Symfony it will also bring more structure to your application.
+
+To enable caching you just need to point the router to the directory you want to use and if it should cache or not. By default the
+`debug` parameter will be used as to determaine if cache should be used or not.
+
+``` php
+<?php
+
+// .. create a $app before this line
+$app->inject(array(
+    'routing.options' => array(
+        'cache_dir' => '/my/cache/directory/routing',
+    ),
+));
+```
+
+Before it is possible to use the full power of caching it is needed to use configuration files because Silex will always call
+add routes via its convenience methods `get|post|delete|put`. Furtunately this is baked right in.
+
+```
+<?php
+
+// .. create $app
+$app->inject(array(
+    'routing.resource' => 'config/routing.xml',
+));
+```
+
+This will make the router load that resource by default. Here xml is used as an example but `php` is also supported together with
+`yml` if `Symfony\Component\Yaml\Yaml' is autoloadable.
+
+The benefit from doing it this way is of course they can be cached but also it allows you to import routing files that are included
+in libraries and even other Symfony bundles such as the [WebProfilerBundle](https://github.com/symfony/webprofilerbundle). Also it will make it easier to generate routes from
+inside your views.
+
+``` jinja
+<a href="{{ app.router.generate('homepage') }}">Homepage</a>
+```
+
+This is also possible with Silex but with a more verbose syntax.
+
 Documentation
 -------------
 
