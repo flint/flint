@@ -10,20 +10,31 @@ class FlintServiceProviderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->app = new Application(__DIR__, true);
+        $this->provider = new FlintServiceProvider;
     }
 
     public function testResolverIsOverridden()
     {
-        $provider = new FlintServiceProvider;
-        $provider->register($this->app);
+        $this->provider->register($this->app);
 
         $this->assertInstanceOf('Flint\Controller\ControllerResolver', $this->app['resolver']);
     }
 
+    public function testCustomExceptionController()
+    {
+        $this->provider->register($this->app);
+        $this->app['exception_controller'] = 'Acme\\Controller\\ExceptionController::showAction';
+
+        $listener = $this->app['exception_handler'];
+        $refl = new \ReflectionProperty($listener, 'controller');
+        $refl->setAccessible(true);
+
+        $this->assertEquals('Acme\\Controller\\ExceptionController::showAction', $refl->getValue($listener));
+    }
+
     public function testExceptionHandlerIsOverrriden()
     {
-        $provider = new FlintServiceProvider;
-        $provider->register($this->app);
+        $this->provider->register($this->app);
 
         $this->assertInstanceOf('Symfony\Component\HttpKernel\EventListener\ExceptionListener', $this->app['exception_handler']);
     }
