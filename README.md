@@ -134,8 +134,27 @@ inside your views.
 
 This is also possible with Silex but with a more verbose syntax.
 
-Error Pages
------------
+All the little Things
+---------------------
+
+Flint provides a number of small things and features that makes it a bit more
+enjoyable or complete if you will.
+
+### Root and debug Parameters
+
+The two contructor arguments `$rootDir` and `$debug` are also registered on the application as parameters. This makes it easier 
+for services to add paths for caching, logs or other directories.
+
+``` php
+<?php
+
+// .. create $app
+$app->inject(array(
+    'twig.path' => $app['root_dir'] . '/views',
+));
+```
+
+### Custom Error Pages
 
 When finished a project or application it is the small things that matter the most. Such as having a custom error page instead of the one
 Silex provides by default. Also it can help a lost user navigate back. Flint makes this possible by using the exception handler from Symfony 
@@ -163,6 +182,20 @@ $app->inject(array(
 
 To see what parameter the controller action takes look at the one provided by default. Normally it should not be overwritten as it already
 gives a lot of flexibilty with the template lookup.
+
+### Injecting Configuration Parameters
+
+Some times it is more useful to inject an array of parameters instead of setting them on the application one-by-one. Flint have a method that 
+does this. It does the same thing as the second parameter of Silex `register` method.
+
+``` php
+<?php
+
+// .. $app
+$app->inject(array(
+    'twig.paths' => '/my/path/to/views',
+));
+```
 
 Feedback
 --------
