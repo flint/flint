@@ -16,8 +16,10 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        $app['exception_controller'] = 'Flint\\Controller\\ExceptionController::showAction';
+
         $app['exception_handler'] = $app->share(function ($app) {
-            return new ExceptionListener('Flint\\Controller\\ExceptionController::showAction', $app['logger']);
+            return new ExceptionListener($app['exception_controller'], $app['logger']);
         });
 
         $app->extend('resolver', function ($resolver, $app) {
