@@ -127,6 +127,19 @@ $app->inject(array(
 ));
 ```
 
+``` xml
+<!-- config/routing.xml -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="homepage" pattern="/">
+        <default key="_controller">Acme\\Controller\\DefaultController::indexAction</default>
+    </route>
+</routes>
+```
+
 This will make the router load that resource by default. Here xml is used as an example but `php` is also supported together with
 `yml` if `Symfony\Component\Yaml\Yaml' is autoloadable.
 
