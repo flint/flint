@@ -25,6 +25,7 @@ Documentation
 * [Routing](#routing)
 * [Custom Error Pages](#custom-error-pages)
 * [Default Parameters](#default-parameters)
+* [Injecting Configuration Parameters](#injecting-configuration-parameters)
 
 ### Getting started
 
