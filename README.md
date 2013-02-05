@@ -141,7 +141,7 @@ $app->inject(array(
 ```
 
 This will make the router load that resource by default. Here xml is used as an example but `php` is also supported together with
-`yml` if `Symfony\Component\Yaml\Yaml' is autoloadable.
+`yml` if `Symfony\Component\Yaml\Yaml` is autoloadable.
 
 The benefit from doing it this way is of course they can be cached but also it allows you to import routing files that are included
 in libraries and even other Symfony bundles such as the [WebProfilerBundle](https://github.com/symfony/webprofilerbundle). Also it will make it easier to generate routes from
