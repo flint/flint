@@ -17,8 +17,16 @@ Nothing and everything. Everything Silex does, Flint does aswell. This means tha
 * Custom error pages by using the default exception handler from Symfony.
 * [Twig](http://twig.sensiolabs.org) is enabled by default.
 
-Getting started
----------------
+Documentation
+-------------
+
+* [Getting started](#getting-started)
+* [Controllers](#controllers)
+* [Routing](#routing)
+* [Custom Error Pages](#custom-error-pages)
+* [Default Parameters](#default-parameters)
+
+### Getting started
 
 For starting up a new project the easiest way is to use [Composer](http://getcomposer.org) and [Flint-Skeleton](http://github.com/henrikbjorn/flint-skeleton).
 
@@ -41,14 +49,6 @@ $application = new Application($rootDir, $debug);
 ```
 
 It is recommended to subclass `Flint\Application` instead of using the application class directly.
-
-Documentation
--------------
-
-* [Controllers](#controllers)
-* [Routing](#routing)
-* [Custom Error Pages](#custom-error-pages)
-* [Default Parameters](#default-parameters)
 
 ### Controllers
 
