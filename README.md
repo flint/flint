@@ -8,11 +8,11 @@ Flint is build on top of [Silex](http://silex.sensionlabs.org) and tries to brin
 What is Different from Silex
 ----------------------------
 
-Nothing and everything. Everything Silex does, Flint does aswell. This means that it is fully backwards compatible. So if closures are your thing, then dont stop using does but still get some benefit.
+Nothing and everything. Everything Silex does, Flint does aswell. This means that it is fully backwards compatible and that closures can still be used.
 
 * [Twig](http://twig.sensiolabs.org) is enabled by default.
 * Uses the full router instead of the url matcher for more power and flexibility.
-* Supports using `xml|yml|php` files for router configuration.
+* Supports `xml|yml|php` for router configuration.
 * Custom controller resolver that knows how to inject your application.
 * A base controller with convenient helper methods.
 * Custom error pages by using the default exception handler from Symfony.
@@ -29,13 +29,13 @@ Documentation
 
 ### Getting started
 
-For starting up a new project the easiest way is to use [Composer](http://getcomposer.org) and [Flint-Skeleton](http://github.com/henrikbjorn/flint-skeleton).
+To start a new project with Flint the easiest way is to use [Composer](http://getcomposer.org) and [Flint-Skeleton](http://github.com/henrikbjorn/flint-skeleton).
 
 ``` bash
 $ php composer.phar create-project -s dev henrikbjorn/flint-skeleton my-flint-application
 ```
 
-Or if you are migrating from a Silex project change your `composer.json` file to require Flint and change the Application class that is used.
+Or if you are migrating from a Silex project you can change your `composer.json` file to require Flint and change the Application class that is used.
 
 ``` bash
 $ php composer.phar require henrikbjorn/flint:~1.0
@@ -76,8 +76,8 @@ class HelloController extends ApplicationAware
 }
 ```
 
-The other way is to use a base controller. Flint ships with one that mimics most of the one provider with Symfony. To see what methods it implements
-go look at the source code for `Flint\Controller\Controller`.
+Another way is to use a base controller which have convenience methods for the most frequently used services. Theese methods can be seen in the source code
+if you look at the implementation for `Flint\Controller\Controller`.
 
 ``` php
 <?php
