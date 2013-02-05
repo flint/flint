@@ -42,8 +42,15 @@ $application = new Application($rootDir, $debug);
 
 It is recommended to subclass `Flint\Application` instead of using the application class directly.
 
-Controllers
------------
+Documentation
+-------------
+
+* [Controllers](#controllers)
+* [Routing](#routing)
+* [Custom Error Pages](#custom-error-pages)
+* [Default Parameters](#default-parameters)
+
+### Controllers
 
 Flint tries to make Silex more like Symfony. And by using closures it is hard to seperate controllers in a logic way when you have more than a
 couple of them. To make it better it is recommended to use classes and methods for controllers. The basics is [explained here](http://silex.sensiolabs.org/doc/usage.html#controllers-in-classes)
@@ -87,8 +94,7 @@ class HelloController extends Controller
 }
 ```
 
-Routing
--------
+### Routing
 
 Because Flint replaces the url matcher used in Symfony with the full router implementation a lot of new things is possible.
 
@@ -134,13 +140,7 @@ inside your views.
 
 This is also possible with Silex but with a more verbose syntax.
 
-All the little Things
----------------------
-
-Flint provides a number of small things and features that makes it a bit more
-enjoyable or complete if you will.
-
-### Root and debug Parameters
+### Default Parameters
 
 The two contructor arguments `$rootDir` and `$debug` are also registered on the application as parameters. This makes it easier 
 for services to add paths for caching, logs or other directories.
@@ -205,4 +205,4 @@ Please provide feedback on everything (code, structure, idea etc) over twitter o
 Who
 ---
 
-Build by [@henrikbjorn](http://twitter.com/henrikbjorn), [Peytz & Co](http://peytz.dk) and [other contributors](https://github.com/henrikbjorn/flint/graphs/contributors).
+Build by [@henrikbjorn](http://twitter.com/henrikbjorn) at [Peytz & Co](http://peytz.dk). With the help of [other contributors](https://github.com/henrikbjorn/flint/graphs/contributors).
