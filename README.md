@@ -10,12 +10,12 @@ What is Different from Silex
 
 Nothing and everything. Everything Silex does, Flint does aswell. This means that it is fully backwards compatible. So if closures are your thing, then dont stop using does but still get some benefit.
 
-* Uses the full router instead of the url matcher. This gives the more power to the developer.
-* Supports using `xml|yml|php` files for router configuration.
-* Custom `ControllerResolver` that knows how to inject your `Application` into controllers.
-* A base `Controller` with helper methods that matches the one found in [FrameworBundle](http://github.com/symfony/frameworkbundle).
-* Custom error pages by using the default exception handler from Symfony.
 * [Twig](http://twig.sensiolabs.org) is enabled by default.
+* Uses the full router instead of the url matcher for more power and flexibility.
+* Supports using `xml|yml|php` files for router configuration.
+* Custom controller resolver that knows how to inject your application.
+* A base controller with convenient helper methods.
+* Custom error pages by using the default exception handler from Symfony.
 
 Documentation
 -------------
@@ -118,7 +118,7 @@ $app->inject(array(
 Before it is possible to use the full power of caching it is needed to use configuration files because Silex will always call
 add routes via its convenience methods `get|post|delete|put`. Furtunately this is baked right in.
 
-```
+``` php
 <?php
 
 // .. create $app
