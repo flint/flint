@@ -1,3 +1,10 @@
+
+1.0.5 / 2013-02-08 
+==================
+
+  * Alias url_generator service to router to be compatible with application using UrlGeneratorServiceProvider
+  * New documentation
+
 1.0.4 / 2013-02-04 
 ==================
 
