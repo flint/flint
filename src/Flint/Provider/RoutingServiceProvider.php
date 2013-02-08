@@ -75,6 +75,7 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
         };
 
         $app['url_matcher'] = $app->raw('router');
+        $app['url_generator'] = $app->raw('router');
     }
 
     /**

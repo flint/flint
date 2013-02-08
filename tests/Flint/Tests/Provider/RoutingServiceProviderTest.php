@@ -13,11 +13,12 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->provider = new RoutingServiceProvider;
     }
 
-    public function testUrlMatcherIsAliasOrRouter()
+    public function testUrlMatcherAndGeneratorIsAliasOfRouter()
     {
         $this->provider->register($this->app);
 
         $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['url_matcher']);
+        $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['url_generator']);
     }
 
     public function testRedirectableUrlMatcherIsUsed()
