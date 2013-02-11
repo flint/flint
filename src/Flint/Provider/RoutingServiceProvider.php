@@ -60,9 +60,9 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
 
         $app['router'] = $app->share(function (Application $app) {
             $defaults = array(
-                'debug' => $app['debug'],
-                'matcher_class' => 'Silex\\RedirectableUrlMatcher',
+                'debug'              => $app['debug'],
                 'matcher_base_class' => 'Silex\\RedirectableUrlMatcher',
+                'matcher_class'      => 'Silex\\RedirectableUrlMatcher',
             );
 
             $options = array_replace($defaults, $app['routing.options']);

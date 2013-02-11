@@ -26,10 +26,10 @@ class Application extends \Silex\Application
             'debug' => $debug,
         ));
 
-        $this->register(new TwigServiceProvider);
-        $this->register(new FlintServiceProvider);
         $this->register(new ConfigServiceProvider);
         $this->register(new RoutingServiceProvider);
+        $this->register(new TwigServiceProvider);
+        $this->register(new FlintServiceProvider);
     }
 
     /**
