@@ -6,14 +6,18 @@ use Flint\Application;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->app = new Application(__DIR__, true);
+    }
+
     public function testInjectSetParameters()
     {
-        $app = new Application(__DIR__, true);
-        $app->inject(array(
+        $this->app->inject(array(
             'key.param' => 'key.value',
         ));
 
-        $this->assertEquals($app['key.param'], 'key.value');
+        $this->assertEquals($this->app['key.param'], 'key.value');
     }
 
     public function testRootDirAndDebugIsSet()
@@ -22,5 +26,31 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($app['debug']);
         $this->assertEquals('/my/root_dir', $app['root_dir']);
+    }
+
+    /**
+     * @dataProvider serviceProvidersProvider
+     */
+    public function testProvidersAreRegistered($index, $providerClassName)
+    {
+        $mock = $this->getMockBuilder('Flint\Application')
+            ->setMethods(array('register'))
+            ->disableOriginalConstructor()->getMock();
+
+        $mock->expects($this->at($index))
+            ->method('register')
+            ->with($this->isInstanceOf($providerClassName));
+
+        call_user_func_array(array($mock, '__construct'), array(__DIR__, true));
+    }
+
+    public function serviceProvidersProvider()
+    {
+        return array(
+            array(0, 'Flint\Provider\ConfigServiceProvider'),
+            array(1, 'Flint\Provider\RoutingServiceProvider'),
+            array(2, 'Silex\Provider\TwigServiceProvider'),
+            array(3, 'Flint\Provider\FlintServiceProvider'),
+        );
     }
 }
