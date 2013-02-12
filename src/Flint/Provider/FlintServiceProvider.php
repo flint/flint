@@ -22,15 +22,15 @@ class FlintServiceProvider implements \Silex\ServiceProviderInterface
             return new ExceptionListener($app['exception_controller'], $app['logger']);
         });
 
-        $app->extend('resolver', function ($resolver, $app) {
+        $app['resolver'] = $app->share($app->extend('resolver', function ($resolver, $app) {
             return new ControllerResolver($resolver, $app);
-        });
+        }));
 
-        $app->extend('twig.loader.filesystem', function ($loader, $app) {
+        $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesytem', function ($loader, $app) {
             $loader->addPath(__DIR__ . '/../Resources/views', 'Flint');
 
             return $loader;
-        });
+        }));
     }
 
     /**
