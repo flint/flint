@@ -152,7 +152,23 @@ inside your views.
 <a href="{{ app.router.generate('homepage') }}">Homepage</a>
 ```
 
-This is also possible with Silex but with a more verbose syntax.
+This is also possible with Silex but with a more verbose syntax. The syntax can be even more precise by using the twig functions that is available in
+the Twig bridge for Symfony. To enable thoose add the twig bridge to your composer file.
+
+``` json
+{
+    "require" : {
+        "symfony/twig-bridge" : "~2.0"
+    }
+}
+```
+
+Now it is possible to use the functions inside your Twig templates.
+
+``` jinja
+<a href="{{ path('homepage') }}">Homepage</a>
+<a href="{{ url('homepage') }}">Homepage</a>
+```
 
 ### Default Parameters
 
