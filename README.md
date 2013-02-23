@@ -195,7 +195,7 @@ This will only work when debug is turned off.
 To override the error pages the same logic is used as inside Symfony.
 The logic is very well described [in their documentation](http://symfony.com/doc/master/cookbook/controller/error_pages.html).
 
-Only difference from Symfony is the templates must be created inside `views/Excetion/` directory. Inside the templates there is
+Only difference from Symfony is the templates must be created inside `views/Exception/` directory. Inside the templates there is
 access to `app` which in turns gives you access to all of the services defined. 
 
 To override the controller used by the exception handler change the `exception_controller` parameter. This parameter will by default
