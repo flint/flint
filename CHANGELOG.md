@@ -1,4 +1,15 @@
 
+1.0.6 / 2013-03-03 
+==================
+
+  * Allow setting parameters in the constructor
+  * Just a small typo fix in README.md
+  * Reshare extended services
+  * allow 5.5 failures
+  * Add section about twig bridge
+  * test the priority of registered service providers
+  * rearrange service providers
+
 1.0.5 / 2013-02-08 
 ==================
 
