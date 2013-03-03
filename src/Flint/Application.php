@@ -18,13 +18,14 @@ class Application extends \Silex\Application
      *
      * @param string $rootDir
      * @param boolean $debug
+     * @param array $parameters
      */
-    public function __construct($rootDir, $debug = false)
+    public function __construct($rootDir, $debug = false, array $parameters = array())
     {
-        parent::__construct(array(
-            'root_dir' => $rootDir,
-            'debug' => $debug,
-        ));
+        parent::__construct($parameters);
+
+        $this['root_dir'] = $rootDir;
+        $this['debug'] = $debug;
 
         $this->register(new ConfigServiceProvider);
         $this->register(new RoutingServiceProvider);

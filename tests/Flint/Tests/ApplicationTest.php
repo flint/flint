@@ -20,6 +20,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->app['key.param'], 'key.value');
     }
 
+    public function testParametersCanBeSetFromConstructor()
+    {
+        $app = new Application(__DIR__, true, array(
+            'my_parameter' => 'my_parameter_value',
+        ));
+
+        $this->assertEquals('my_parameter_value', $app['my_parameter']);
+    }
+
     public function testRootDirAndDebugIsSet()
     {
         $app = new Application('/my/root_dir', true);
