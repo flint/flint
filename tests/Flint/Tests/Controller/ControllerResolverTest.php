@@ -8,16 +8,16 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->app = $this->getMockBuilder('Flint\Application')->disableOriginalConstructor()->getMock();
         $this->resolver = $this->getMock('Symfony\Component\HttpKernel\Controller\ControllerResolverInterface');
     }
 
-    public function testApplicationIsInjectedWhenControllerIsPimpleAware()
+    public function testPimpleIsInjectedWhenControllerIsPimpleAware()
     {
-        $resolver = new ControllerResolver($this->resolver, $this->app);
+        $pimple = new \Pimple();
+        $resolver = new ControllerResolver($this->resolver, $pimple);
         $controller = $this->getMock('Flint\PimpleAwareInterface');
 
-        $controller->expects($this->once())->method('setPimple');
+        $controller->expects($this->once())->method('setPimple')->with($this->equalTo($pimple));
 
         $this->resolver->expects($this->any())->method('getController')->will($this->returnValue(array(
             $controller,
@@ -27,20 +27,20 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
         $resolver->getController($this->getMock('Symfony\Component\HttpFoundation\Request'));
     }
 
-    public function testApplicationIsNotInjectedWhenNotApplicable()
+    public function testPimpleIsNotInjectedWhenNotApplicable()
     {
         $controller = $this->getMock('Flint\PimpleAwareInterface');
         $controller->expects($this->never())->method('setPimple');
 
         $this->resolver->expects($this->any())->method('getController')->will($this->returnValue(null));
 
-        $resolver = new ControllerResolver($this->resolver, $this->app);
+        $resolver = new ControllerResolver($this->resolver, new \Pimple());
         $resolver->getController($this->getMock('Symfony\Component\HttpFoundation\Request'));
     }
 
     public function testGetArgumentsIsDelegatedToWrappedResolver()
     {
-        $resolver = new ControllerResolver($this->resolver, $this->app);
+        $resolver = new ControllerResolver($this->resolver, new \Pimple());
 
         $this->resolver->expects($this->once())->method('getArguments');
 

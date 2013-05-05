@@ -20,10 +20,9 @@ class PimpleAwareTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('null', $refl->getValue($mock));
 
-        $pimple = $this->getMockBuilder('Flint\Application')->disableOriginalConstructor()->getMock();
-
+        $pimple = new \Pimple();
         $mock->setPimple($pimple);
 
-        $this->assertEquals($pimple, $refl->getValue($mock));
+        $this->assertSame($pimple, $refl->getValue($mock));
     }
 }

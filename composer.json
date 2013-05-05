@@ -16,9 +16,13 @@
 
     "require" : {
         "php"            : ">=5.3.3",
-        "silex/silex"    : "1.0.*@dev",
-        "twig/twig"      : "~1.0",
-        "symfony/config" : "~2.0"
+        "silex/silex"    : "~1.0",
+        "twig/twig"      : "~1.10",
+        "symfony/config" : "~2.2"
+    },
+
+    "require-dev" : {
+        "symfony/console" : "~2.2"
     },
 
     "extra" : {
