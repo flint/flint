@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * @package Flint
  */
-abstract class Controller extends \Flint\ApplicationAware
+abstract class Controller extends \Flint\PimpleAware
 {
     /**
      * Creates a normal response with the given text and statusCode
@@ -28,7 +28,7 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function generateUrl($name, array $parameters = array(), $reference = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->app['router']->generate($name, $parameters, $reference);
+        return $this->pimple['router']->generate($name, $parameters, $reference);
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function render($name, array $context = array())
     {
-        return $this->app['twig']->render($name, $context);
+        return $this->pimple['twig']->render($name, $context);
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function redirect($url, $statusCode = 302)
     {
-        return $this->app->redirect($url, $statusCode);
+        return $this->pimple->redirect($url, $statusCode);
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function abort($statusCode, $message = '', array $headers = array())
     {
-        return $this->app->abort($statusCode, $message, $headers);
+        return $this->pimple->abort($statusCode, $message, $headers);
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function has($id)
     {
-        return isset($this->app[$id]);
+        return isset($this->pimple[$id]);
     }
 
     /**
@@ -70,6 +70,6 @@ abstract class Controller extends \Flint\ApplicationAware
      */
     public function get($id)
     {
-        return $this->app[$id];
+        return $this->pimple[$id];
     }
 }

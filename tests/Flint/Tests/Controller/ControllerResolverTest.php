@@ -12,12 +12,12 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
         $this->resolver = $this->getMock('Symfony\Component\HttpKernel\Controller\ControllerResolverInterface');
     }
 
-    public function testApplicationIsInjectedWhenControllerIsApplicationAware()
+    public function testApplicationIsInjectedWhenControllerIsPimpleAware()
     {
         $resolver = new ControllerResolver($this->resolver, $this->app);
-        $controller = $this->getMock('Flint\ApplicationAwareInterface');
+        $controller = $this->getMock('Flint\PimpleAwareInterface');
 
-        $controller->expects($this->once())->method('setApplication');
+        $controller->expects($this->once())->method('setPimple');
 
         $this->resolver->expects($this->any())->method('getController')->will($this->returnValue(array(
             $controller,
@@ -29,8 +29,8 @@ class ControllerResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testApplicationIsNotInjectedWhenNotApplicable()
     {
-        $controller = $this->getMock('Flint\ApplicationAwareInterface');
-        $controller->expects($this->never())->method('setApplication');
+        $controller = $this->getMock('Flint\PimpleAwareInterface');
+        $controller->expects($this->never())->method('setPimple');
 
         $this->resolver->expects($this->any())->method('getController')->will($this->returnValue(null));
 

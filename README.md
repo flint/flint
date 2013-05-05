@@ -57,21 +57,21 @@ Flint tries to make Silex more like Symfony. And by using closures it is hard to
 couple of them. To make it better it is recommended to use classes and methods for controllers. The basics is [explained here](http://silex.sensiolabs.org/doc/usage.html#controllers-in-classes)
 but Flint takes it further and allows the application to be injected into a controller.
 
-The first way to accomplish this is by implementing `ApplicationAwareInterface` or extending `ApplicationAware`. This works exactly [as described in Symfony](http://symfony.com/doc/2.0/book/controller.html#the-base-controller-class).
-With the only exception that the property is called `$app` instead of `$container`.
+The first way to accomplish this is by implementing `PimpleAwareInterface` or extending `PimpleAware`. This works exactly [as described in Symfony](http://symfony.com/doc/2.0/book/controller.html#the-base-controller-class).
+With the only exception that the property is called `$pimple` instead of `$container`.
 
 ``` php
 <?php
 
 namespace Acme\Controller;
 
-use Flint\ApplicationAware;
+use Flint\PimpleAware;
 
-class HelloController extends ApplicationAware
+class HelloController extends PimpleAware
 {
     public function indexAction()
     {
-        return $this->app['twig']->render('Hello/index.html.twig');
+        return $this->pimple['twig']->render('Hello/index.html.twig');
     }
 }
 ```

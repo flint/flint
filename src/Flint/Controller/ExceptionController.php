@@ -19,9 +19,9 @@ class ExceptionController extends Controller
      */
     public function showAction(Request $request, FlattenException $exception, $format)
     {
-        $handler = new ExceptionHandler($this->app['debug']);
+        $handler = new ExceptionHandler($this->pimple['debug']);
 
-        if ($this->app['debug']) {
+        if ($this->pimple['debug']) {
             return $handler->createResponse($exception);
         }
 
@@ -29,7 +29,7 @@ class ExceptionController extends Controller
         $template = $this->resolve($request, $code, $format);
 
         if ($template) {
-            $contents =  $this->app['twig']->render($template, array(
+            $contents =  $this->pimple['twig']->render($template, array(
                 'status_code'    => $code,
                 'status_text'    => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
                 'exception'      => $exception,
@@ -49,7 +49,7 @@ class ExceptionController extends Controller
      */
     protected function resolve(Request $request, $code, $format)
     {
-        $loader = $this->app['twig.loader'];
+        $loader = $this->pimple['twig.loader'];
 
         $templates = array(
             'Exception/error' . $code . '.' . $format . '.twig',

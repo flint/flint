@@ -3,7 +3,7 @@
 namespace Flint\Controller;
 
 use Flint\Application;
-use Flint\ApplicationAwareInterface;
+use Flint\PimpleAwareInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 
@@ -15,17 +15,17 @@ use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
  */
 class ControllerResolver implements ControllerResolverInterface
 {
-    protected $app;
+    protected $pimple;
     protected $resolver;
 
     /**
      * @param ControllerResolverInterface $resolver
-     * @param Application $app
+     * @param Pimple $pimple
      */
-    public function __construct(ControllerResolverInterface $resolver, Application $app)
+    public function __construct(ControllerResolverInterface $resolver, \Pimple $pimple)
     {
         $this->resolver = $resolver;
-        $this->app = $app;
+        $this->pimple = $pimple;
     }
 
     /**
@@ -39,8 +39,8 @@ class ControllerResolver implements ControllerResolverInterface
             return $controller;
         }
 
-        if ($controller[0] instanceof ApplicationAwareInterface) {
-            $controller[0]->setApplication($this->app);
+        if ($controller[0] instanceof PimpleAwareInterface) {
+            $controller[0]->setPimple($this->pimple);
         }
 
         return $controller;
