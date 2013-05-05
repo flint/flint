@@ -1,3 +1,9 @@
+1.2.0 / 2013-05-06
+==================
+
+  * `ApplicationAwareInterface` and `ApplicationAware` was renamed to `PimpleAwareInterface` and `PimpleAware`. This
+  means Controller must use `$this->pimple` instead of `$this->app` when accessing services. The base Controller have
+  been updated.
 
 1.0.6 / 2013-03-03 
 ==================
