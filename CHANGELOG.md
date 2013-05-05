@@ -4,6 +4,8 @@
   * `ApplicationAwareInterface` and `ApplicationAware` was renamed to `PimpleAwareInterface` and `PimpleAware`. This
   means Controller must use `$this->pimple` instead of `$this->app` when accessing services. The base Controller have
   been updated.
+  * Add a `Flint\Console\Application` base class that gives access to `pimple` through `PimpleAwareInterface`. It takes
+  a `Pimple` object as the first constructor argument.
 
 1.0.6 / 2013-03-03 
 ==================

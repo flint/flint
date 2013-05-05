@@ -26,6 +26,7 @@ Documentation
 * [Custom Error Pages](#custom-error-pages)
 * [Default Parameters](#default-parameters)
 * [Injecting Configuration Parameters](#injecting-configuration-parameters)
+* [Pimple Console](#pimple-console)
 
 ### Getting started
 
@@ -225,6 +226,28 @@ does this. It does the same thing as the second parameter of Silex `register` me
 $app->inject(array(
     'twig.paths' => '/my/path/to/views',
 ));
+```
+
+### Pimple Console
+
+`Flint\Console\Application` is an extension of the base console application shipped with Symfony. It gives access to Pimple in commands.
+
+``` php
+<?php
+
+namespace Application\Command;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class MyCommand extends \Symfony\Component\Console\Command\Command
+{
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $pimple = $this->getApplication()->getPimple();
+    }
+}
 ```
 
 Feedback
