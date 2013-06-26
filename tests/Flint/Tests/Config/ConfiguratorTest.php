@@ -4,6 +4,8 @@ namespace Flint\Tests\Config;
 
 use Flint\Config\Configurator;
 use Pimple;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 
 class ConfiguratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,6 +18,9 @@ CONTENT;
     public function setUp()
     {
         $this->loader = $this->getMock('Symfony\Component\Config\Loader\LoaderInterface');
+        $this->loader->expects($this->any())->method('supports')->will($this->returnValue(true));
+
+        $this->delegator = new DelegatingLoader(new LoaderResolver(array($this->loader)));
         $this->cacheFile = "/var/tmp/1058386122.php";
     }
 
@@ -24,7 +29,7 @@ CONTENT;
         @unlink($this->cacheFile);
     }
 
-    public function testItBuilderPimple()
+    public function testItBuilds()
     {
         $this->loader->expects($this->once())->method('load')->with($this->equalTo('config.json'))
             ->will($this->returnValue(array('service_parameter' => 'hello')));
@@ -34,25 +39,6 @@ CONTENT;
         $this->createConfigurator()->configure($pimple, 'config.json');
 
         $this->assertEquals('hello', $pimple['service_parameter']);
-    }
-
-    public function testItBuildsPimpleWithInheritedConfig()
-    {
-        $this->loader->expects($this->at(0))->method('load')->with($this->equalTo('config.json'))
-            ->will($this->returnValue(array('@import' => 'inherited.json', 'service_parameter' => 'hello')));
-
-        $this->loader->expects($this->at(1))->method('load')->with($this->equalTo('inherited.json'))
-            ->will($this->returnValue(array('@import' => 'most_parent.json', 'service_parameter' => 'not hello', 'new_parameter' => false)));
-
-        $this->loader->expects($this->at(2))->method('load')->with($this->equalTo('most_parent.json'))
-            ->will($this->returnValue(array('service_parameter' => 'other thing', 'new_parameter' => true)));
-
-        $pimple = new Pimple;
-
-        $this->createConfigurator()->configure($pimple, 'config.json');
-
-        $this->assertEquals('hello', $pimple['service_parameter']);
-        $this->assertFalse($pimple['new_parameter']);
     }
 
     public function testAFreshCacheSkipsLoader()
@@ -85,6 +71,6 @@ CONTENT;
 
     protected function createConfigurator($debug = true)
     {
-        return new Configurator($this->loader, '/var/tmp', $debug);
+        return new Configurator($this->delegator, '/var/tmp', $debug);
     }
 }

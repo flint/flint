@@ -21,7 +21,12 @@ class JsonFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testItLoadsAsJsonFile()
     {
-        $this->assertEquals(array('service_parameter' => 'hello'), $this->loader->load('config.json'));
+        $this->assertEquals(array('base_parameter' => 'hello'), $this->loader->load('base.json'));
+    }
+
+    public function testItLoadsInheritedJsonFiles()
+    {
+        $this->assertEquals(array('base_parameter' => 'hello', 'service_parameter' => 'hello'), $this->loader->load('config.json'));
     }
 
     public function testItSupportsJson()
@@ -30,12 +35,5 @@ class JsonFileLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->loader->supports('config.ini'));
         $this->assertFalse($this->loader->supports('config.xml'));
         $this->assertFalse($this->loader->supports('config.php'));
-    }
-
-    public function testUnsupportedThrowExceptionWhenLoading()
-    {
-        $this->setExpectedException('Symfony\Component\Config\Exception\FileLoaderLoadException');
-
-        $this->loader->load('unsupported.ini');
     }
 }

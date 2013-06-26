@@ -9,6 +9,8 @@ use Flint\Config\Normalizer\EnvironmentNormalizer;
 use Flint\Config\Normalizer\PimpleAwareNormalizer;
 use Silex\Application;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 
 /**
  * @package Flint
@@ -36,12 +38,18 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
             return $normalizer;
         });
 
-        $app['config.json_file_loader'] = $app->share(function (Application $app) {
-            return new JsonFileLoader($app['config.normalizer'], $app['config.locator']);
+        $app['config.loader'] = $app->share(function (Application $app) {
+            return new DelegatingLoader($app['config.loader_resolver']);
+        });
+
+        $app['config.loader_resolver'] = $app->share(function ($app) {
+            $loader = new JsonFileLoader($app['config.normalizer'], $app['config.locator']);
+
+            return new LoaderResolver(array($loader));
         });
 
         $app['configurator'] = $app->share(function (Application $app) {
-            return new Configurator($app['config.json_file_loader'], $app['config.cache_dir'], $app['debug']);
+            return new Configurator($app['config.loader'], $app['config.cache_dir'], $app['debug']);
         });
 
         if (!isset($app['config.cache_dir'])) {
