@@ -9,7 +9,7 @@ use Pimple;
  */
 class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInterface
 {
-    const PLACEHOLDER = '/%([A-Za-z0-9_.]+)%/';
+    const PLACEHOLDER = '{%%|%([a-z0-9_.]+)%}';
 
     /**
      * @param Pimple $pimple
@@ -34,6 +34,10 @@ class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInte
      */
     protected function callback($matches)
     {
+        if (!isset($matches[1])) {
+            return '%%';
+        }
+
         $value = $this->pimple[$matches[1]];
 
         return is_bool($value) ? ($value ? 'true' : 'false') : $value;

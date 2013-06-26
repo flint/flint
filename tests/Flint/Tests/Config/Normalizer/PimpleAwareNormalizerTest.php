@@ -13,5 +13,7 @@ class PimpleAwareNormalizerTest extends \PHPUnit_Framework_TestCase
         $normalizer = new PimpleAwareNormalizer($pimple);
 
         $this->assertEquals('hello', $normalizer->normalize('%service_parameter%'));
+        $this->assertEquals('%%hello', $normalizer->normalize('%%%service_parameter%'));
+        $this->assertEquals('%%service_parameter%', $normalizer->normalize('%%service_parameter%'));
     }
 }

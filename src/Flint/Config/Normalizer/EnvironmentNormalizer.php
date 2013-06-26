@@ -7,7 +7,7 @@ namespace Flint\Config\Normalizer;
  */
 class EnvironmentNormalizer implements NormalizerInterface
 {
-    const PLACEHOLDER = '/#([A-Za-z0-9_.]+)#/';
+    const PLACEHOLDER = '{##|#([A-Z0-9_]+)#}';
 
     /**
      * @param string $contents
@@ -24,6 +24,10 @@ class EnvironmentNormalizer implements NormalizerInterface
      */
     protected function callback($matches)
     {
+        if (!isset($matches[1])) {
+            return '##';
+        }
+
         return getenv($matches[1]);
     }
 }
