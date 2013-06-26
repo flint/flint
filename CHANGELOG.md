@@ -1,3 +1,8 @@
+1.3.0 / 2013-06-26
+
+  * New documentation in Sphinx which is hosted on readthedocs.org
+  * Configuration with JSON files and caching.
+
 1.2.0 / 2013-05-06
 ==================
 
