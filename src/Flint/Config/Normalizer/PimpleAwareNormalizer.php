@@ -38,8 +38,25 @@ class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInte
             return '%%';
         }
 
-        $value = $this->pimple[$matches[1]];
+        return $this->scarlarToString($this->pimple[$matches[1]]);
+    }
 
-        return is_bool($value) ? ($value ? 'true' : 'false') : $value;
+    /**
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function scarlarToString($value)
+    {
+        switch (gettype($value)) {
+            case 'resource':
+            case 'object':
+                throw new \RuntimeException('Unable to replace placeholder if its replacement is an object or resource.');
+            case 'boolean':
+                return $value ? 'true' : 'false';
+            case 'NULL':
+                return 'null';
+            default:
+                return (string) $value;
+        }
     }
 }
