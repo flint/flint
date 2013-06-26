@@ -4,7 +4,6 @@ namespace Flint\Config;
 
 use Pimple;
 use Symfony\Component\Config\ConfigCache;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 /**
@@ -34,15 +33,14 @@ class Configurator
      */
     public function configure(Pimple $pimple, $resource)
     {
-        $metadata = new \ArrayObject;
         $cache = new ConfigCache($this->cacheDir . '/' . crc32($resource) . '.php', $this->debug);
 
         if (!$cache->isFresh()) {
-            $parameters = $this->load($resource, $metadata);
+            $parameters = $this->loader->load($resource);
         }
 
         if ($this->cacheDir && isset($parameters)) {
-            $cache->write('<?php $parameters = ' . var_export($parameters, true) . ';', iterator_to_array($metadata));
+            $cache->write('<?php $parameters = ' . var_export($parameters, true) . ';');
         }
 
         if (!isset($parameters)) {
@@ -50,24 +48,6 @@ class Configurator
         }
 
         $this->build($pimple, $parameters);
-    }
-
-    /**
-     * @param string $resource
-     * @param ArrayObject $metadata
-     * @return array
-     */
-    protected function load($resource, \ArrayObject $metadata)
-    {
-        $parameters = $this->loader->load($resource);
-
-        $metadata->append(new FileResource($resource));
-
-        if (isset($parameters['@import'])) {
-            $parameters = array_replace($this->load($parameters['@import'], $metadata), $parameters);
-        }
-
-        return $parameters;
     }
 
     /**

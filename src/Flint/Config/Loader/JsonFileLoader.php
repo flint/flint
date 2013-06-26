@@ -29,13 +29,34 @@ class JsonFileLoader extends \Symfony\Component\Config\Loader\FileLoader
      */
     public function load($resource, $type = null)
     {
-        if (!$this->supports($resource)) {
-            throw new FileLoaderLoadException($resource);
-        } 
+        $file = $this->locator->locate($resource);
 
-        $contents = file_get_contents($this->locator->locate($resource));
+        return $this->parse($this->read($file), $file);
+    }
 
-        return json_decode($this->normalizer->normalize($contents), true);
+    /**
+     * @param array $parameters
+     * @param string $file
+     * @return array
+     */
+    protected function parse(array $parameters, $file)
+    {
+        if (!isset($parameters['@import'])) {
+            return $parameters;
+        }
+
+        $import = $parameters['@import'];
+
+        unset($parameters['@import']);
+
+        $this->setCurrentDir(dirname($import));
+
+        return array_replace($this->import($import, null, false, $file), $parameters);
+    }
+
+    protected function read($resource)
+    {
+        return json_decode($this->normalizer->normalize(file_get_contents($resource)), true);
     }
 
     /**
