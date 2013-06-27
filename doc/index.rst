@@ -293,3 +293,9 @@ application which in this instance would be ``$app['my_parameter']``. It will al
 
 It is possible to inherit from a config file by using a special key ``@import`` and set its value to another file. The
 loaded parameters from ``@import`` will have the lowest priority when merging the two files.
+
+.. warning::
+
+    When using Silex version 1.0.0 or earlier it is not possible to load configurations in the boot method. This is because
+    when adding a listener to the `dispatcher` service it will get the routes and a bunch of other services which means it
+    is too late.
