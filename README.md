@@ -12,7 +12,4 @@ Who
 
 Build by [@henrikbjorn](http://twitter.com/henrikbjorn). With the help of [other contributors](https://github.com/henrikbjorn/flint/graphs/contributors).
 
-Special Thanks
---------------
-
 [![Peytz & Co](doc/_static/peytzco.jpg)](http://peytz.dk)
