@@ -17,8 +17,8 @@ class Configurator
 
     /**
      * @param LoaderInterface $resolver
-     * @param string $cacheDir
-     * @param boolean $debug
+     * @param string          $cacheDir
+     * @param boolean         $debug
      */
     public function __construct(LoaderInterface $resolver, $cacheDir, $debug = false)
     {
@@ -52,7 +52,7 @@ class Configurator
 
     /**
      * @param Pimple $pimple
-     * @param array $parameters
+     * @param array  $parameters
      */
     protected function build(Pimple $pimple, array $parameters)
     {

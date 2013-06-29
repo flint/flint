@@ -20,7 +20,7 @@ class ControllerResolver implements ControllerResolverInterface
 
     /**
      * @param ControllerResolverInterface $resolver
-     * @param Pimple $pimple
+     * @param Pimple                      $pimple
      */
     public function __construct(ControllerResolverInterface $resolver, \Pimple $pimple)
     {

@@ -20,7 +20,7 @@ class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInte
     }
 
     /**
-     * @param string $contents
+     * @param  string $contents
      * @return string
      */
     public function normalize($contents)
@@ -29,7 +29,7 @@ class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInte
     }
 
     /**
-     * @param array $matches
+     * @param  array $matches
      * @return mixed
      */
     protected function callback($matches)
@@ -42,7 +42,7 @@ class PimpleAwareNormalizer extends \Flint\PimpleAware implements NormalizerInte
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed $value
      * @return mixed
      */
     protected function scarlarToString($value)

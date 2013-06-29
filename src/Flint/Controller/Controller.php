@@ -13,9 +13,9 @@ abstract class Controller extends \Flint\PimpleAware
     /**
      * Creates a normal response with the given text and statusCode
      *
-     * @param string $text
-     * @param integer $statusCode
-     * @param array $headers
+     * @param  string   $text
+     * @param  integer  $statusCode
+     * @param  array    $headers
      * @return Response
      */
     public function text($text, $statusCode = 200, array $headers = array())
@@ -56,7 +56,7 @@ abstract class Controller extends \Flint\PimpleAware
     }
 
     /**
-     * @param string $id
+     * @param  string  $id
      * @return boolean
      */
     public function has($id)
@@ -65,7 +65,7 @@ abstract class Controller extends \Flint\PimpleAware
     }
 
     /**
-     * @param string $id
+     * @param  string $id
      * @return mixed
      */
     public function get($id)

@@ -16,9 +16,9 @@ class Application extends \Silex\Application
      * Assigns rootDir and debug to the pimple container. Also replaces the
      * normal resolver with a PimpleAware Resolver.
      *
-     * @param string $rootDir
+     * @param string  $rootDir
      * @param boolean $debug
-     * @param array $parameters
+     * @param array   $parameters
      */
     public function __construct($rootDir, $debug = false, array $parameters = array())
     {

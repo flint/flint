@@ -4,7 +4,6 @@ namespace Flint\Config\Loader;
 
 use Flint\Config\Normalizer\NormalizerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Config\Exception\FileLoaderLoadException;
 
 /**
  * @package Flint
@@ -14,7 +13,7 @@ class JsonFileLoader extends \Symfony\Component\Config\Loader\FileLoader
     protected $normalizer;
 
     /**
-     * @param NormalizerInterface $normalizer
+     * @param NormalizerInterface  $normalizer
      * @param FileLocatorInterface $locator
      */
     public function __construct(NormalizerInterface $normalizer, FileLocatorInterface $locator)
@@ -35,8 +34,8 @@ class JsonFileLoader extends \Symfony\Component\Config\Loader\FileLoader
     }
 
     /**
-     * @param array $parameters
-     * @param string $file
+     * @param  array  $parameters
+     * @param  string $file
      * @return array
      */
     protected function parse(array $parameters, $file)

@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 class ExceptionController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request          $request
      * @param FlattenException $exception
-     * @param string $format
+     * @param string           $format
      */
     public function showAction(Request $request, FlattenException $exception, $format)
     {
@@ -42,9 +42,9 @@ class ExceptionController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param integer $code
-     * @param string $format
+     * @param  Request     $request
+     * @param  integer     $code
+     * @param  string      $format
      * @return string|null
      */
     protected function resolve(Request $request, $code, $format)

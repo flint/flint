@@ -10,7 +10,7 @@ class EnvironmentNormalizer implements NormalizerInterface
     const PLACEHOLDER = '{##|#([A-Z0-9_]+)#}';
 
     /**
-     * @param string $contents
+     * @param  string $contents
      * @return string
      */
     public function normalize($contents)
@@ -19,7 +19,7 @@ class EnvironmentNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param array $matches
+     * @param  array $matches
      * @return mixed
      */
     protected function callback($matches)

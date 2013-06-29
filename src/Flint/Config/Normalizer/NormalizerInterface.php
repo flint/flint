@@ -8,7 +8,7 @@ namespace Flint\Config\Normalizer;
 interface NormalizerInterface
 {
     /**
-     * @param string $contents
+     * @param  string $contents
      * @return string
      */
     public function normalize($contents);
