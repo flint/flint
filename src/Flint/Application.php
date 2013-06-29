@@ -34,6 +34,16 @@ class Application extends \Silex\Application
     }
 
     /**
+     * @see Flint\Config\Configurator::configure()
+     * @param string $resource
+     */
+    public function configure($resource)
+    {
+        $this['configurator']->configure($this, $resource);
+    }
+
+    /**
+     * @deprecated
      * @param array $parameters
      */
     public function inject(array $parameters)
