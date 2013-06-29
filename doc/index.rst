@@ -285,7 +285,10 @@ It is very easy to use:
     use Flint\Application;
 
     $app = new Application($rootDir, $debug);
-    $app['configurator']->load($app, 'app/config/prod.json');
+    $app->configure('config.json');
+
+    // Or use the service directly
+    $app['configurator']->configure($app, 'app/config/prod.json');
 
 The Configurator will replace placeholders marked with ``%my_parameter%`` with the corresponding parameter in your
 application which in this instance would be ``$app['my_parameter']``. It will also replace placeholders marked as
