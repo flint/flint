@@ -1,10 +1,12 @@
 1.3.1 / 2013-06-26
+==================
 
   * PHP Scalar values are now converted to its string counter part `true` will be `'true'` and so forth.
   * Replacement for `%placeholder%` and `#PLACEHOLDER#` have been made more robust. Also `%placeholder%` only matches
   lowercase characters and `#PLACEHOLDER#` only matches uppercase characters.
 
 1.3.0 / 2013-06-26
+==================
 
   * New documentation in Sphinx which is hosted on readthedocs.org
   * Configuration with JSON files and caching.
