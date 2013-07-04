@@ -1,3 +1,12 @@
+1.4.0 / 2013-07-04
+==================
+
+ * Configuration cache is now automatically bursted when debug is true and a file have changed.
+ * Introduce a ResourceCollection object that ConfigLoaders must add Resources to when loading. This 
+ caused a BC break in the Configurator constructor arguments.
+ * Debug and cache dir is now setters on the Configurator instead of constructor arguments.
+ * Changed package name to `flint/flint`.
+
 1.3.1 / 2013-06-26
 ==================
 
