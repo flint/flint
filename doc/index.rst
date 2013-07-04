@@ -21,7 +21,7 @@ that is used.
 
 .. code-block:: bash
 
-    $ php composer.phar require henrikbjorn/flint:~1.0
+    $ php composer.phar require flint/flint:~1.0
 
 .. code-block:: php
 

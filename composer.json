@@ -1,5 +1,5 @@
 {
-    "name"        : "henrikbjorn/flint",
+    "name"        : "flint/flint",
     "description" : "Enhanced Silex",
     "license"     : "MIT",
 
@@ -12,6 +12,10 @@
         "psr-0" : {
             "Flint" : "src"
         }
+    },
+
+    "replace" : {
+        "henrikbjorn/flint" : "self.version"
     },
 
     "require" : {
