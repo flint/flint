@@ -30,6 +30,7 @@ CONTENT;
     public function tearDown()
     {
         @unlink($this->cacheFile);
+        @unlink($this->cacheDilr.  '.meta');
     }
 
     public function testItBuilds()
