@@ -32,7 +32,7 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
         });
 
         $app['config.resource_collection'] = $app->share(function (Application $app) {
-            return ResourceCollection;
+            return new ResourceCollection;
         });
 
         $app['config.normalizer'] = $app->share(function (Application $app) {
