@@ -3,6 +3,7 @@
 namespace Flint\Tests\Config;
 
 use Flint\Config\Configurator;
+use Flint\Config\ResourceCollection;
 use Pimple;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -22,6 +23,8 @@ CONTENT;
 
         $this->delegator = new DelegatingLoader(new LoaderResolver(array($this->loader)));
         $this->cacheFile = "/var/tmp/1058386122.php";
+
+        $this->resources = new ResourceCollection;
     }
 
     public function tearDown()
@@ -66,11 +69,14 @@ CONTENT;
         $this->createConfigurator(false)->configure($pimple, 'config.json');
 
         $this->assertEquals(file_get_contents($this->cacheFile), static::CACHE_CONTENT);
-
     }
 
     protected function createConfigurator($debug = true)
     {
-        return new Configurator($this->delegator, '/var/tmp', $debug);
+        $configurator = new Configurator($this->delegator, $this->resources);
+        $configurator->setDebug($debug);
+        $configurator->setCacheDir('/var/tmp');
+
+        return $configurator;
     }
 }

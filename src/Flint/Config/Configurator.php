@@ -12,19 +12,36 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 class Configurator
 {
     protected $loader;
+    protected $resources;
     protected $cacheDir;
-    protected $debug;
+    protected $debug = true;
 
     /**
      * @param LoaderInterface $resolver
+     * @param ResourceCollection $resources
      * @param string          $cacheDir
      * @param boolean         $debug
      */
-    public function __construct(LoaderInterface $resolver, $cacheDir, $debug = false)
+    public function __construct(LoaderInterface $resolver, ResourceCollection $resources)
     {
+        $this->resources = $resources;
         $this->loader = $resolver;
+    }
+
+    /**
+     * @param boolean $debug
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = (boolean) $debug;
+    }
+
+    /**
+     * @param string $cacheDir
+     */
+    public function setCacheDir($cacheDir)
+    {
         $this->cacheDir = $cacheDir;
-        $this->debug = $debug;
     }
 
     /**
@@ -40,7 +57,7 @@ class Configurator
         }
 
         if ($this->cacheDir && isset($parameters)) {
-            $cache->write('<?php $parameters = ' . var_export($parameters, true) . ';');
+            $cache->write('<?php $parameters = ' . var_export($parameters, true) . ';', $this->resources->all());
         }
 
         if (!isset($parameters)) {

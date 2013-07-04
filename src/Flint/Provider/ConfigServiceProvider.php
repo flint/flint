@@ -3,6 +3,7 @@
 namespace Flint\Provider;
 
 use Flint\Config\Configurator;
+use Flint\Config\ResourceCollection;
 use Flint\Config\Loader\JsonFileLoader;
 use Flint\Config\Normalizer\ChainNormalizer;
 use Flint\Config\Normalizer\EnvironmentNormalizer;
@@ -30,6 +31,10 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
             return new FileLocator($app['config.paths']);
         });
 
+        $app['config.resource_collection'] = $app->share(function (Application $app) {
+            return ResourceCollection;
+        });
+
         $app['config.normalizer'] = $app->share(function (Application $app) {
             $normalizer = new ChainNormalizer;
             $normalizer->add(new PimpleAwareNormalizer($app));
@@ -43,13 +48,17 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
         });
 
         $app['config.loader_resolver'] = $app->share(function ($app) {
-            $loader = new JsonFileLoader($app['config.normalizer'], $app['config.locator']);
+            $loader = new JsonFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']);
 
             return new LoaderResolver(array($loader));
         });
 
         $app['configurator'] = $app->share(function (Application $app) {
-            return new Configurator($app['config.loader'], $app['config.cache_dir'], $app['debug']);
+            $configurator = new Configurator($app['config.loader'], $app['config.resource_collection']);
+            $configurator->setCacheDir($app['config.cache_dir']);
+            $configurator->setDebug($app['debug']);
+
+            return $configurator;
         });
 
         if (!isset($app['config.cache_dir'])) {

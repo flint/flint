@@ -2,6 +2,7 @@
 
 namespace Flint\Tests\Config\Loader;
 
+use Flint\Config\ResourceCollection;
 use Flint\Config\Loader\JsonFileLoader;
 use Symfony\Component\Config\FileLocator;
 
@@ -16,7 +17,7 @@ class JsonFileLoaderTest extends \PHPUnit_Framework_TestCase
             return $args;
         }));
 
-        $this->loader = new JsonFileLoader($normalizer, new FileLocator($paths));
+        $this->loader = new JsonFileLoader($normalizer, new FileLocator($paths), new ResourceCollection);
     }
 
     public function testItLoadsAsJsonFile()

@@ -3,7 +3,9 @@
 namespace Flint\Config\Loader;
 
 use Flint\Config\Normalizer\NormalizerInterface;
+use Flint\Config\ResourceCollection;
 use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\Config\Resource\FileResource;
 
 /**
  * @package Flint
@@ -11,16 +13,21 @@ use Symfony\Component\Config\FileLocatorInterface;
 class JsonFileLoader extends \Symfony\Component\Config\Loader\FileLoader
 {
     protected $normalizer;
+    protected $resources;
 
     /**
      * @param NormalizerInterface  $normalizer
      * @param FileLocatorInterface $locator
      */
-    public function __construct(NormalizerInterface $normalizer, FileLocatorInterface $locator)
-    {
+    public function __construct(
+        NormalizerInterface $normalizer,
+        FileLocatorInterface $locator,
+        ResourceCollection $resources
+    ) {
         parent::__construct($locator);
 
         $this->normalizer = $normalizer;
+        $this->resources = $resources;
     }
 
     /**
@@ -28,9 +35,11 @@ class JsonFileLoader extends \Symfony\Component\Config\Loader\FileLoader
      */
     public function load($resource, $type = null)
     {
-        $file = $this->locator->locate($resource);
+        $resource = $this->locator->locate($resource);
 
-        return $this->parse($this->read($file), $file);
+        $this->resources->add(new FileResource($resource));
+
+        return $this->parse($this->read($resource), $resource);
     }
 
     /**
