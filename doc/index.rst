@@ -109,11 +109,9 @@ parameter will be used as to determaine if cache should be used or not.
     <?php
 
     // .. create a $app before this line
-    $app->inject(array(
-        'routing.options' => array(
-            'cache_dir' => '/my/cache/directory/routing',
-        ),
-    ));
+    $app['routing.options'] = array(
+        'cache_dir' => '/my/cache/directory/routing',
+    );
 
 Before it is possible to use the full power of caching it is needed to
 use configuration files because Silex will always call add routes via
@@ -125,9 +123,7 @@ baked right in.
     <?php
 
     // .. create $app
-    $app->inject(array(
-        'routing.resource' => 'config/routing.xml',
-    ));
+    $app['routing.resource'] = 'config/routing.xml';
 
 .. code-block:: xml
 
@@ -178,6 +174,11 @@ Now it is possible to use the functions inside your Twig templates.
 
 Default Parameters
 ------------------
+
+.. warning::
+
+    This functionality is deprecated and it is encouraged to use the configuration
+    functionality provided by Flint instead.
 
 The two contructor arguments ``$rootDir`` and ``$debug`` are also
 registered on the application as parameters. This makes it easier for
