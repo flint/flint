@@ -175,11 +175,6 @@ Now it is possible to use the functions inside your Twig templates.
 Default Parameters
 ------------------
 
-.. warning::
-
-    This functionality is deprecated and it is encouraged to use the configuration
-    functionality provided by Flint instead.
-
 The two contructor arguments ``$rootDir`` and ``$debug`` are also
 registered on the application as parameters. This makes it easier for
 services to add paths for caching, logs or other directories.
@@ -188,10 +183,9 @@ services to add paths for caching, logs or other directories.
 
     <?php
 
-    // .. create $app
-    $app->inject(array(
-        'twig.path' => $app['root_dir'] . '/views',
-    ));
+    $app = new Flint\Application(__DIR__, true);
+    $app['debug'] === true;
+    $app['root_dir'] === __DIR__;
 
 Custom Error Pages
 ------------------
@@ -232,6 +226,11 @@ gives a lot of flexibilty with the template lookup.
 
 Injecting Configuration Parameters
 ----------------------------------
+
+.. warning::
+
+    This functionality is deprecated and it is encouraged to use the configuration
+    functionality provided by Flint instead.
 
 Some times it is more useful to inject an array of parameters instead of
 setting them on the application one-by-one. Flint have a method that
