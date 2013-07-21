@@ -2,5 +2,4 @@ vendor
 coverage
 docs/_build
 composer.lock
-.DS_Store
 phpunit.xml
