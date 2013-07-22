@@ -48,9 +48,12 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
         });
 
         $app['config.loader_resolver'] = $app->share(function ($app) {
-            $loader = new JsonFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']);
+            $loaders = array(
+                new JsonFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']),
+                new IniFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']),
+            );
 
-            return new LoaderResolver(array($loader));
+            return new LoaderResolver($loaders);
         });
 
         $app['configurator'] = $app->share(function (Application $app) {
