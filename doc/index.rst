@@ -249,6 +249,39 @@ does this. It does the same thing as the second parameter of Silex
 Pimple Console
 --------------
 
+## Helper
+
+Flint have a helper that provides access to a pimple instance or in the case of Flint access to you application
+object.
+
+.. code-block:: php
+
+    <?php
+
+    class SomeCommand extends Command
+    {
+        public function execute(InputInterface $input, OutputInterface $output)
+        {
+            $pimple = $this->getHelperSet()->get('pimple');
+        }
+    }
+
+To register the helper do this.
+
+.. code-block:: php
+
+    <?php
+
+    $app = new Symfony\Component\Console\Application;
+    $app->getHelperSet()->set(new Flint\Console\PimpleHelper($pimple));
+
+
+## Application
+
+.. warning::
+    
+    This is deprecated and it is adviced to use ``Flint\Console\PimpleHelper`` instead.
+
 ``Flint\Console\Application`` is an extension of the base console
 application shipped with Symfony. It gives access to Pimple in commands.
 
