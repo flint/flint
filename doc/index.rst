@@ -224,32 +224,12 @@ To see what parameter the controller action takes look at the one
 provided by default. Normally it should not be overwritten as it already
 gives a lot of flexibilty with the template lookup.
 
-Injecting Configuration Parameters
-----------------------------------
-
-.. warning::
-
-    This functionality is deprecated and it is encouraged to use the configuration
-    functionality provided by Flint instead.
-
-Some times it is more useful to inject an array of parameters instead of
-setting them on the application one-by-one. Flint have a method that
-does this. It does the same thing as the second parameter of Silex
-``register`` method.
-
-.. code-block:: php
-
-    <?php
-
-    // .. $app
-    $app->inject(array(
-        'twig.paths' => '/my/path/to/views',
-    ));
 
 Pimple Console
 --------------
 
-## Helper
+Helper
+~~~~~~
 
 Flint have a helper that provides access to a pimple instance or in the case of Flint access to you application
 object.
@@ -276,7 +256,8 @@ To register the helper do this.
     $app->getHelperSet()->set(new Flint\Console\PimpleHelper($pimple));
 
 
-## Application
+Application
+~~~~~~~~~~~
 
 .. warning::
     
