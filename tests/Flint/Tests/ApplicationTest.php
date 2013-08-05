@@ -11,15 +11,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->app = new Application(__DIR__, true);
     }
 
-    public function testInjectSetParameters()
-    {
-        $this->app->inject(array(
-            'key.param' => 'key.value',
-        ));
-
-        $this->assertEquals($this->app['key.param'], 'key.value');
-    }
-
     public function testParametersCanBeSetFromConstructor()
     {
         $app = new Application(__DIR__, true, array(
