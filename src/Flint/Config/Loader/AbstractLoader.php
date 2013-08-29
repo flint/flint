@@ -18,6 +18,7 @@ abstract class AbstractLoader extends \Symfony\Component\Config\Loader\FileLoade
     /**
      * @param NormalizerInterface  $normalizer
      * @param FileLocatorInterface $locator
+     * @param ResourceCollection   $resources
      */
     public function __construct(
         NormalizerInterface $normalizer,
@@ -62,6 +63,10 @@ abstract class AbstractLoader extends \Symfony\Component\Config\Loader\FileLoade
         return array_replace($this->import($import, null, false, $file), $parameters);
     }
 
+    /**
+     * @param $resource
+     * @return array
+     */
     abstract protected function read($resource);
 
 }

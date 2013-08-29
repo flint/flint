@@ -2,17 +2,20 @@
 
 namespace Flint\Config\Loader;
 
-use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @package Flint
  */
 class YamlFileLoader extends AbstractLoader
 {
+    /**
+     * @param  $resource
+     * @return array
+     */
     protected function read($resource)
     {
-        $parser = new Parser();
-        return $parser->parse(file_get_contents($resource));
+        return Yaml::parse(file_get_contents($resource));
     }
 
     /**
