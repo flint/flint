@@ -67,7 +67,6 @@ abstract class Controller extends \Flint\PimpleAware
     }
 
     /**
-     *
      * @return Request
      */
     protected function getRequest()
@@ -127,7 +126,6 @@ abstract class Controller extends \Flint\PimpleAware
     {
         return $this->get('form.factory')->createBuilder('form', $data, $options);
     }
-
 
     /**
      * @param  string  $id
