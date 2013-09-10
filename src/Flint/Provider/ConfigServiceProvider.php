@@ -3,6 +3,8 @@
 namespace Flint\Provider;
 
 use Flint\Config\Configurator;
+use Flint\Config\Loader\IniFileLoader;
+use Flint\Config\Loader\YamlFileLoader;
 use Flint\Config\ResourceCollection;
 use Flint\Config\Loader\JsonFileLoader;
 use Flint\Config\Normalizer\ChainNormalizer;
@@ -51,6 +53,7 @@ class ConfigServiceProvider implements \Silex\ServiceProviderInterface
             $loaders = array(
                 new JsonFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']),
                 new IniFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']),
+                new YamlFileLoader($app['config.normalizer'], $app['config.locator'], $app['config.resource_collection']),
             );
 
             return new LoaderResolver($loaders);

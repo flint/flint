@@ -57,11 +57,11 @@ abstract class Controller extends \Flint\PimpleAware
 
     /**
      * This will result in a 404 response code.
+     * 
      * @param string $message
-     * @param \Exception $previous
-     * @return mixed
+     * @return Exception
      */
-    protected function createNotFoundException($message = 'Not Found', \Exception $previous = null)
+    protected function createNotFoundException($message = 'Not Found')
     {
         return $this->abort(404, $message);
     }
@@ -77,11 +77,8 @@ abstract class Controller extends \Flint\PimpleAware
     /**
      * Get a user from the Security Context
      *
+     * @throws \LogicException
      * @return mixed
-     *
-     * @throws \LogicException If SecurityServiceProvider is not available
-     *
-     * @see Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUser()
      */
     public function getUser()
     {
@@ -119,7 +116,6 @@ abstract class Controller extends \Flint\PimpleAware
      *
      * @param mixed $data    The initial data for the form
      * @param array $options Options for the form
-     *
      * @return \Symfony\Component\Form\FormBuilder
      */
     public function createFormBuilder($data = null, array $options = array())
