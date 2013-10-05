@@ -113,6 +113,21 @@ parameter will be used as to determine if cache should be used or not.
         'cache_dir' => '/my/cache/directory/routing',
     );
 
+.. warning:: Migrating from Silex
+
+    If you are migrating from Silex, you must move all of your
+    anonymous controller callbacks into controller methods before you
+    try to enable caching for the router. Anonymous callbacks are
+    instances of the Closure class and so cannot be exported into
+    the cached PHP class.
+
+    For this reason, all controller service providers must use
+    named methods in controller classes, too.
+
+    ``UrlGeneratorServiceProvider`` conflicts with Flint's 
+    ``RoutingServiceProvider`` which provides a ``url_generator``
+    service.
+
 Before it is possible to use the full power of caching it is needed to
 use configuration files because Silex will always call add routes via
 its convenience methods ``get|post|delete|put``. Fortunately this is
