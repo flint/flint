@@ -70,9 +70,6 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
         });
 
-        $app['routes'] = function (Application $app) {
-            return $app['router']->getRouteCollection();
-        };
 
         $app['url_matcher'] = $app->raw('router');
         $app['url_generator'] = $app->raw('router');
