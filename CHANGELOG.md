@@ -1,3 +1,11 @@
+2.0.0 / YYYY-MM-DD
+
+ * `ChainUrlMatcher` Removes issues with the Router trying to serialize callbacks into cached files. Also removes a performance
+ issue where `routes` service call would reload a routing file.
+ * Update all provider to new Pimple and Silex conventions.
+ * Only rely on `silex/api` instead of `silex/silex`.
+ * Rename `FlintServiceProvider` to `ExceptionServiceProvider` and move `resolver` to RoutingServiceProvider.
+
 1.6.0 / YYYY-MM-DD
 ==================
 
