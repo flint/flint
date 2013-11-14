@@ -1,8 +1,8 @@
 Flint
 =====
 
-Flint is a microframework built on top of Silex. It tries to bridge the gap between Silex and
-Symfony by bringing structure and conventions to Silex.
+Flint is a collection of Service Providers for Silex. That can be used all together as its own micro framework or
+independently to enhance your Silex application with plug'n'play functionality.
 
 Getting started
 ---------------
