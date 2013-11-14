@@ -41,12 +41,12 @@ class ChainUrlMatcher implements UrlMatcherInterface
      */
     public function match($patchinfo)
     {
-        foreach ($matchers as $matcher) {
-            try {
+        try {
+            foreach ($matchers as $matcher) {
                 return $matcher->match($pathinfo);
-            } catch (\Exception $e) {
-                $exception = $e;
             }
+        } catch (\Exception $e) {
+            $exception = $e;
         }
 
         return $exception;
@@ -57,7 +57,7 @@ class ChainUrlMatcher implements UrlMatcherInterface
      */
     public function setContext(RequestContext $context)
     {
-        $this->context = $contect;
+        $this->context = $context;
 
         foreach ($this->matchers as $matcher) {
             $matcher->setContext($context);
