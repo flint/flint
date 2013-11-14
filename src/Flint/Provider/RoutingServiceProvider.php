@@ -2,8 +2,9 @@
 
 namespace Flint\Provider;
 
-use Silex\Application;
+use Pimple;
 use Flint\Routing\Loader\NullLoader;
+use Flint\Controller\ControllerResolver;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
@@ -14,33 +15,37 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 /**
  * @package Flint
  */
-class RoutingServiceProvider implements \Silex\ServiceProviderInterface
+class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function register(Application $app)
+    public function register(Pimple $app)
     {
         $app['routing.resource'] = null;
         $app['routing.options'] = array();
 
-        $app['routing.loader.xml'] = $app->share(function (Application $app) {
+        $app['resolver'] = $app->extend('resolver', function ($resolver, $app) {
+            return new ControllerResolver($resolver, $app);
+        });
+
+        $app['routing.loader.xml'] = function ($app) {
             return new XmlFileLoader($app['config.locator']);
-        });
+        };
 
-        $app['routing.loader.php'] = $app->share(function (Application $app) {
+        $app['routing.loader.php'] = function ($app) {
             return new PhpFileLoader($app['config.locator']);
-        });
+        };
 
-        $app['routing.loader.yml'] = $app->share(function (Application $app) {
+        $app['routing.loader.yml'] = function ($app) {
             return new YamlFileLoader($app['config.locator']);
-        });
+        };
 
-        $app['routing.loader.null'] = $app->share(function (Application $app) {
+        $app['routing.loader.null'] = function ($app) {
             return new NullLoader;
-        });
+        };
 
-        $app['routing.loader.resolver'] = $app->share(function (Application $app) {
+        $app['routing.loader.resolver'] = function ($app) {
             $loaders = array(
                 $app['routing.loader.xml'],
                 $app['routing.loader.php'],
@@ -52,13 +57,13 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             }
 
             return new LoaderResolver($loaders);
-        });
+        };
 
-        $app['routing.loader'] = $app->share(function (Application $app) {
+        $app['routing.loader'] = function ($app) {
             return new DelegatingLoader($app['routing.loader.resolver']);
-        });
+        };
 
-        $app['router'] = $app->share(function (Application $app) {
+        $app['router'] = function ($app) {
             $defaults = array(
                 'debug'              => $app['debug'],
                 'matcher_base_class' => 'Silex\\RedirectableUrlMatcher',
@@ -68,20 +73,18 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             $options = array_replace($defaults, $app['routing.options']);
 
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
-        });
-
-        $app['routes'] = function (Application $app) {
-            return $app['router']->getRouteCollection();
         };
 
-        $app['url_matcher'] = $app->raw('router');
-        $app['url_generator'] = $app->raw('router');
-    }
+        $app['routes'] = $app->factory(function ($app) {
+            return $app['router']->getRouteCollection();
+        });
 
-    /**
-     * {@inheritDoc}
-     */
-    public function boot(Application $app)
-    {
+        $app['url_matcher'] = $app->factory(function ($app) {
+            return $app['router'];
+        });
+
+        $app['url_generator'] = $app->factory(function ($app) {
+            return $app['router'];
+        });
     }
 }

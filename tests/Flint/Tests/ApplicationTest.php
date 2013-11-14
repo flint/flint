@@ -39,30 +39,4 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $app->configure('config.json');
     }
-
-    /**
-     * @dataProvider serviceProvidersProvider
-     */
-    public function testProvidersAreRegistered($index, $providerClassName)
-    {
-        $mock = $this->getMockBuilder('Flint\Application')
-            ->setMethods(array('register'))
-            ->disableOriginalConstructor()->getMock();
-
-        $mock->expects($this->at($index))
-            ->method('register')
-            ->with($this->isInstanceOf($providerClassName));
-
-        call_user_func_array(array($mock, '__construct'), array(__DIR__, true));
-    }
-
-    public function serviceProvidersProvider()
-    {
-        return array(
-            array(0, 'Flint\Provider\ConfigServiceProvider'),
-            array(1, 'Flint\Provider\RoutingServiceProvider'),
-            array(2, 'Silex\Provider\TwigServiceProvider'),
-            array(3, 'Flint\Provider\FlintServiceProvider'),
-        );
-    }
 }

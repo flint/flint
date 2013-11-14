@@ -3,7 +3,7 @@
 namespace Flint;
 
 use Flint\Provider\ConfigServiceProvider;
-use Flint\Provider\FlintServiceProvider;
+use Flint\Provider\ExceptionServiceProvider;
 use Flint\Provider\RoutingServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 
@@ -30,7 +30,7 @@ class Application extends \Silex\Application
         $this->register(new ConfigServiceProvider);
         $this->register(new RoutingServiceProvider);
         $this->register(new TwigServiceProvider);
-        $this->register(new FlintServiceProvider);
+        $this->register(new ExceptionServiceProvider);
     }
 
     /**

@@ -13,12 +13,21 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->provider = new RoutingServiceProvider;
     }
 
+    public function testResolverIsOverridden()
+    {
+        $this->provider->register($this->app);
+
+        $this->assertInstanceOf('Flint\Controller\ControllerResolver', $this->app['resolver']);
+    }
+
     public function testUrlMatcherAndGeneratorIsAliasOfRouter()
     {
         $this->provider->register($this->app);
 
-        $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['url_matcher']);
-        $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['url_generator']);
+        $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['router']);
+
+        $this->assertSame($this->app['router'], $this->app['url_matcher']);
+        $this->assertSame($this->app['router'], $this->app['url_generator']);
     }
 
     public function testRedirectableUrlMatcherIsUsed()
