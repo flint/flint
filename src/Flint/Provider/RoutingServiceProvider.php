@@ -2,15 +2,16 @@
 
 namespace Flint\Provider;
 
-use Pimple;
-use Flint\Routing\Loader\NullLoader;
 use Flint\Controller\ControllerResolver;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\Loader\XmlFileLoader;
-use Symfony\Component\Routing\Loader\PhpFileLoader;
-use Symfony\Component\Routing\Loader\YamlFileLoader;
-use Symfony\Component\Config\Loader\LoaderResolver;
+use Flint\Routing\Loader\NullLoader;
+use Flint\Routing\Matcher\ChainUrlMatcher;
+use Pimple;
 use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\Routing\Loader\PhpFileLoader;
+use Symfony\Component\Routing\Loader\XmlFileLoader;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\Router;
 
 /**
  * @package Flint
@@ -75,12 +76,11 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
         };
 
-        $app['routes'] = $app->factory(function ($app) {
-            return $app['router']->getRouteCollection();
-        });
-
-        $app['url_matcher'] = $app->factory(function ($app) {
-            return $app['router'];
+        $app->extend('url_matcher', function ($matcher, $app) {
+            return new ChainUrlMatcher(array(
+                $app['router'],
+                $matcher,
+            ));
         });
 
         $app['url_generator'] = $app->factory(function ($app) {

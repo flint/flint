@@ -20,13 +20,19 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Flint\Controller\ControllerResolver', $this->app['resolver']);
     }
 
-    public function testUrlMatcherAndGeneratorIsAliasOfRouter()
+    public function testMatcherIsChain()
+    {
+        $this->provider->register($this->app);
+
+        $this->assertInstanceOf('Flint\Routing\Matcher\ChainUrlMatcher', $this->app['url_matcher']);
+    }
+
+    public function testGeneratorIsAliasOfRouter()
     {
         $this->provider->register($this->app);
 
         $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['router']);
 
-        $this->assertSame($this->app['router'], $this->app['url_matcher']);
         $this->assertSame($this->app['router'], $this->app['url_generator']);
     }
 
@@ -36,17 +42,5 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Silex\\RedirectableUrlMatcher', $this->app['router']->getOption('matcher_class'));
         $this->assertEquals('Silex\\RedirectableUrlMatcher', $this->app['router']->getOption('matcher_base_class'));
-    }
-
-    public function testRouteCollectionIsGottenFromRouter()
-    {
-        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')->disableOriginalConstructor()->getMock();
-        $router->expects($this->once())->method('getRouteCollection');
-
-        $this->provider->register($this->app);
-
-        $this->app['router'] = $router;
-
-        $this->app['routes'];
     }
 }
