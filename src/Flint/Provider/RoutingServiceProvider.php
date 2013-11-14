@@ -77,10 +77,7 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
         };
 
         $app->extend('url_matcher', function ($matcher, $app) {
-            return new ChainUrlMatcher(array(
-                $app['router'],
-                $matcher,
-            ));
+            return new ChainUrlMatcher(array($app['router'], $matcher));
         });
 
         $app['url_generator'] = $app->factory(function ($app) {
