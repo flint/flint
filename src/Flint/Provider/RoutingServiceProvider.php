@@ -25,7 +25,7 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
         $app['routing.resource'] = null;
         $app['routing.options'] = array();
 
-        $app['resolver'] = $app->extend('resolver', function ($resolver, $app) {
+        $app->extend('resolver', function ($resolver, $app) {
             return new ControllerResolver($resolver, $app);
         });
 

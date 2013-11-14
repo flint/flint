@@ -24,7 +24,8 @@
 
     "require-dev" : {
         "symfony/console" : "2.4.0-BETA2",
-        "twig/twig" : "~1.14"
+        "twig/twig" : "~1.14",
+        "silex/silex" : "dev-2.0-experimental"
     },
 
     "extra" : {

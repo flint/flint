@@ -22,7 +22,7 @@ class ExceptionServiceProvider implements \Silex\Api\ServiceProviderInterface
             return new ExceptionListener($app['exception_controller'], $app['logger']);
         };
 
-        $app['twig.loader.filesystem'] = $app->extend('twig.loader.filesystem', function ($loader) {
+        $app->extend('twig.loader.filesystem', function ($loader) {
             $loader->addPath(__DIR__ . '/../Resources/views', 'Flint');
 
             return $loader;
