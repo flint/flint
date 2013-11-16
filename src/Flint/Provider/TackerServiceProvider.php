@@ -16,19 +16,15 @@ use Tacker\Normalizer\PimpleNormalizer;
 use Pimple;
 
 /**
- * ServiceProvider for Tacker
- *
  * @package Flint
  */
 class TackerServiceProvider implements \Silex\Api\ServiceProviderInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function register(Pimple $app)
     {
-        // This should proberly have a different name.
-        $app['locator'] = function ($app) {
-            return new FileLocator($app['paths']);
-        };
-
         $app['tacker'] = function ($app) {
             return new Configurator($app['tacker.loader'], $app['tacker.normalizer'], $app['tacker.resource_collection']);
         };

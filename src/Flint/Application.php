@@ -6,6 +6,7 @@ use Flint\Provider\TackerServiceProvider;
 use Flint\Provider\ExceptionServiceProvider;
 use Flint\Provider\RoutingServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * @package Flint
@@ -27,6 +28,9 @@ class Application extends \Silex\Application
         $this['root_dir'] = $rootDir;
         $this['debug'] = $debug;
         $this['paths'] = array($rootDir);
+        $this['locator'] = function ($app) {
+            return new FileLocator($app['paths']);
+        };
 
         $this->register(new TackerServiceProvider);
         $this->register(new RoutingServiceProvider);
