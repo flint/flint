@@ -23,11 +23,12 @@ class Application extends \Silex\Application
      */
     public function __construct($rootDir, $debug = false, array $parameters = array())
     {
-        parent::__construct($parameters);
+        parent::__construct(array_replace($parameters, array(
+            'root_dir' => $rootDir,
+            'debug'    => $debug,
+            'paths'    => array($rootDir),
+        )));
 
-        $this['root_dir'] = $rootDir;
-        $this['debug'] = $debug;
-        $this['paths'] = array($rootDir);
         $this['locator'] = function ($app) {
             return new FileLocator($app['paths']);
         };
