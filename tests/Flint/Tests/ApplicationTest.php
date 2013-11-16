@@ -30,13 +30,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testConfigureWillLoadConfigFile()
     {
-        $app = new Application('/my/root_dir', true);
-        $app['configurator'] = $this->getMockBuilder('Flint\Config\Configurator')
-            ->disableOriginalConstructor()->getMock();
-
-        $app['configurator']->expects($this->once())->method('configure')
-            ->with($this->equalTo($app), $this->equalTo('config.json'));
-
+        $app = new Application(__DIR__ . '/Fixtures', true);
         $app->configure('config.json');
+
+        $this->assertTrue(isset($app['hello']));
+        $this->assertEquals('world', $app['hello']);
     }
 }

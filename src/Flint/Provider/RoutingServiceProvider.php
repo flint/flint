@@ -31,15 +31,15 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
         });
 
         $app['routing.loader.xml'] = function ($app) {
-            return new XmlFileLoader($app['config.locator']);
+            return new XmlFileLoader($app['locator']);
         };
 
         $app['routing.loader.php'] = function ($app) {
-            return new PhpFileLoader($app['config.locator']);
+            return new PhpFileLoader($app['locator']);
         };
 
         $app['routing.loader.yml'] = function ($app) {
-            return new YamlFileLoader($app['config.locator']);
+            return new YamlFileLoader($app['locator']);
         };
 
         $app['routing.loader.null'] = function ($app) {
