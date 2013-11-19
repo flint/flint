@@ -4,6 +4,8 @@ namespace Flint\Routing\Matcher;
 
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * Contains multiple matchers and circumvent a problem with 
@@ -42,14 +44,18 @@ class ChainUrlMatcher implements UrlMatcherInterface
     public function match($patchinfo)
     {
         try {
-            foreach ($matchers as $matcher) {
+            foreach ($this->matchers as $matcher) {
                 return $matcher->match($pathinfo);
             }
-        } catch (\Exception $e) {
+        } catch (MethodNotAllowedException $e) {
             $exception = $e;
+        } catch (ResourceNotFoundException $e) {
+            if (!isset($exception)) {
+                $exception = $e;
+            }
         }
 
-        return $exception;
+        throw $exception;
     }
 
     /**
