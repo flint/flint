@@ -1,4 +1,3 @@
 {
-    "@import" : "base.json",
-    "service_parameter" : "hello"
+    "hello" : "world"
 }

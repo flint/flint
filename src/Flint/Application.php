@@ -2,10 +2,11 @@
 
 namespace Flint;
 
-use Flint\Provider\ConfigServiceProvider;
-use Flint\Provider\FlintServiceProvider;
+use Flint\Provider\TackerServiceProvider;
+use Flint\Provider\ExceptionServiceProvider;
 use Flint\Provider\RoutingServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * @package Flint
@@ -22,23 +23,28 @@ class Application extends \Silex\Application
      */
     public function __construct($rootDir, $debug = false, array $parameters = array())
     {
-        parent::__construct($parameters);
+        parent::__construct(array_replace($parameters, array(
+            'root_dir' => $rootDir,
+            'debug'    => $debug,
+            'paths'    => array($rootDir),
+        )));
 
-        $this['root_dir'] = $rootDir;
-        $this['debug'] = $debug;
+        $this['locator'] = function ($app) {
+            return new FileLocator($app['paths']);
+        };
 
-        $this->register(new ConfigServiceProvider);
+        $this->register(new TackerServiceProvider);
         $this->register(new RoutingServiceProvider);
         $this->register(new TwigServiceProvider);
-        $this->register(new FlintServiceProvider);
+        $this->register(new ExceptionServiceProvider);
     }
 
     /**
-     * @see Flint\Config\Configurator::configure()
+     * @see Tacker\Configurator::configure()
      * @param string $resource
      */
     public function configure($resource)
     {
-        $this['configurator']->configure($this, $resource);
+        $this['tacker']->configure($this, $resource);
     }
 }

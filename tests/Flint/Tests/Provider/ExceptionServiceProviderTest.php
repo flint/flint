@@ -2,22 +2,15 @@
 
 namespace Flint\Tests\Provider;
 
-use Flint\Provider\FlintServiceProvider;
+use Flint\Provider\ExceptionServiceProvider;
 use Flint\Application;
 
-class FlintServiceProviderTest extends \PHPUnit_Framework_TestCase
+class ExceptionServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->app = new Application(__DIR__, true);
-        $this->provider = new FlintServiceProvider;
-    }
-
-    public function testResolverIsOverridden()
-    {
-        $this->provider->register($this->app);
-
-        $this->assertInstanceOf('Flint\Controller\ControllerResolver', $this->app['resolver']);
+        $this->provider = new ExceptionServiceProvider;
     }
 
     public function testCustomExceptionController()
@@ -41,7 +34,7 @@ class FlintServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testTwigFileLoaderFlintNamespacePathIsAdded()
     {
-        $refl = new \ReflectionClass('Flint\Provider\FlintServiceProvider');
+        $refl = new \ReflectionClass('Flint\Provider\ExceptionServiceProvider');
         $dir = dirname($refl->getFileName()) . '/../Resources/views';
 
         $loader = $this->getMockBuilder('Twig_Loader_Filesystem')->disableOriginalConstructor()->getMock();
@@ -51,8 +44,7 @@ class FlintServiceProviderTest extends \PHPUnit_Framework_TestCase
             return $loader;
         });
 
-        $provider = new FlintServiceProvider;
-        $provider->register($this->app);
+        $this->provider->register($this->app);
 
         $this->app['twig.loader.filesystem'];
     }
