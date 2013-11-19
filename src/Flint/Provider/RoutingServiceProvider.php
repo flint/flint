@@ -67,8 +67,8 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
         $app['router'] = function ($app) {
             $defaults = array(
                 'debug'              => $app['debug'],
-                'matcher_base_class' => 'Silex\\RedirectableUrlMatcher',
-                'matcher_class'      => 'Silex\\RedirectableUrlMatcher',
+                'matcher_base_class' => 'Silex\\Provider\\Routing\\RedirectableUrlMatcher',
+                'matcher_class'      => 'Silex\\Provider\\Routing\\RedirectableUrlMatcher',
             );
 
             $options = array_replace($defaults, $app['routing.options']);
