@@ -41,7 +41,7 @@ class ChainUrlMatcher implements UrlMatcherInterface
     /**
      * {@inheritDoc}
      */
-    public function match($patchinfo)
+    public function match($pathinfo)
     {
         try {
             foreach ($this->matchers as $matcher) {
