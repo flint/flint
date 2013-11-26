@@ -28,16 +28,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/my/root_dir', $app['root_dir']);
     }
 
-    public function testConfigureWillLoadConfigFile()
+    /**
+     * @dataProvider configFilesProvider
+     */
+    public function testConfigureWillLoadConfigFile($file)
     {
-        $app = new Application('/my/root_dir', true);
-        $app['configurator'] = $this->getMockBuilder('Flint\Config\Configurator')
-            ->disableOriginalConstructor()->getMock();
+        $app = new Application(__DIR__ . '/Fixtures', true);
+        $app->configure($file);
 
-        $app['configurator']->expects($this->once())->method('configure')
-            ->with($this->equalTo($app), $this->equalTo('config.json'));
-
-        $app->configure('config.json');
+        $this->assertEquals('world', $app['hello']);
     }
 
     /**
@@ -54,6 +53,16 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             ->with($this->isInstanceOf($providerClassName));
 
         call_user_func_array(array($mock, '__construct'), array(__DIR__, true));
+    }
+
+    public function configFilesProvider()
+    {
+        return array(
+            array('config.json'),
+            array('config.php'),
+            array('config.ini'),
+            array('config.yml'),
+        );
     }
 
     public function serviceProvidersProvider()
