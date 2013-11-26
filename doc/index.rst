@@ -92,7 +92,7 @@ source code if you look at the implementation for
 Routing
 -------
 
-Because Flint replaces the url matcher used in Symfony with the full
+Because Flint replaces the url matcher used in Silex with the full
 router implementation a lot of new things are possible.
 
 Caching is one of those things. It makes your application faster as it
