@@ -4,6 +4,7 @@ namespace Flint\Provider;
 
 use Silex\Application;
 use Flint\Routing\Loader\NullLoader;
+use Flint\Routing\ChainMatcher;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
@@ -70,11 +71,13 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             return new Router($app['routing.loader'], $app['routing.resource'], $options, $app['request_context'], $app['logger']);
         });
 
-        $app['routes'] = function (Application $app) {
-            return $app['router']->getRouteCollection();
-        };
+        $app['url_matcher'] = $app->share($app->extend('url_matcher', function ($matcher, $app) {
+            $matcher = new ChainMatcher(array($app['router'], $matcher));
+            $matcher->setContext($app['request_context']);
 
-        $app['url_matcher'] = $app->raw('router');
+            return $matcher;
+        }));
+
         $app['url_generator'] = $app->raw('router');
     }
 
