@@ -1,7 +1,14 @@
-1.6.0 / YYYY-MM-DD
+1.7.0 / YYYY-MM-DD
+==================
+
+ * Port ChainMatcher from Brick. This fixes issues with ->get, ->post etc. usage when
+ using routing files. Aswell as fixing caching issues.
+
+1.6.0 / 2013-11-26
 ==================
 
  * `YamlFileLoader` now normalizes its contents before parsing.
+ * Tacker is now used for configuration management.
 
 
 1.5.0 / 2013-10-01
