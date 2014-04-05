@@ -161,6 +161,22 @@ The benefit from doing it this way is of course they can be cached but
 also it allows you to import routing files that are included in
 libraries and even other Symfony bundles such as the
 `WebProfilerBundle <https://github.com/symfony/webprofilerbundle>`__.
+
+The WebProfilerBundle routes must be imported into your routing file if you intend on using it. 
+Here's an example of what your routing file may look like in YAML format:
+
+.. code-block:: yaml
+
+    _profiler:
+      resource: "/path/to/vendor/symfony/web-profiler-bundle/Symfony/Bundle/WebProfilerBundle/Resources/config/routing/profiler.xml"
+      type:     xml
+      prefix:   /_profiler
+    
+    _wdt:
+      resource: "/path/to/vendor/symfony/web-profiler-bundle/Symfony/Bundle/WebProfilerBundle/Resources/config/routing/wdt.xml"
+      type:     xml
+      prefix:   /_wdt
+
 Also it will make it easier to generate routes from inside your views.
 
 .. code-block:: jinja
