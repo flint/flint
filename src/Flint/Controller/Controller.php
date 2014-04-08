@@ -28,7 +28,7 @@ abstract class Controller extends \Flint\PimpleAware
      */
     public function generateUrl($name, array $parameters = array(), $reference = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->pimple['router']->generate($name, $parameters, $reference);
+        return $this->pimple['url_generator']->generate($name, $parameters, $reference);
     }
 
     /**
