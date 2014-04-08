@@ -5,6 +5,7 @@ namespace Flint\Provider;
 use Silex\Application;
 use Flint\Routing\Loader\NullLoader;
 use Flint\Routing\ChainMatcher;
+use Flint\Routing\ChainUrlGenerator;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
@@ -78,7 +79,12 @@ class RoutingServiceProvider implements \Silex\ServiceProviderInterface
             return $matcher;
         }));
 
-        $app['url_generator'] = $app->raw('router');
+        $app['url_generator'] = $app->share($app->extend('url_generator', function ($generator, $app) {
+            $generator = new ChainUrlGenerator(array($app['router'], $generator));
+            $generator->setContext($app['request_context']);
+
+            return $generator;
+        }));
     }
 
     /**

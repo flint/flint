@@ -18,7 +18,7 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->provider->register($this->app);
 
         $this->assertInstanceOf('Flint\Routing\ChainMatcher', $this->app['url_matcher']);
-        $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['url_generator']);
+        $this->assertInstanceOf('Flint\Routing\ChainUrlGenerator', $this->app['url_generator']);
         $this->assertInstanceOf('Symfony\Component\Routing\Router', $this->app['router']);
     }
 

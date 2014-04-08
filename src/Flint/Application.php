@@ -6,6 +6,7 @@ use Flint\Provider\ConfigServiceProvider;
 use Flint\Provider\FlintServiceProvider;
 use Flint\Provider\RoutingServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
 
 /**
  * @package Flint
@@ -28,6 +29,7 @@ class Application extends \Silex\Application
         $this['debug'] = $debug;
 
         $this->register(new ConfigServiceProvider);
+        $this->register(new UrlGeneratorServiceProvider);
         $this->register(new RoutingServiceProvider);
         $this->register(new TwigServiceProvider);
         $this->register(new FlintServiceProvider);
