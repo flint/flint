@@ -9,7 +9,7 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->app = new Application(__DIR__, true);
+        $this->app = new Application(__DIR__ . '/../Fixtures', true);
         $this->provider = new RoutingServiceProvider;
     }
 
@@ -28,5 +28,17 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Silex\\RedirectableUrlMatcher', $this->app['router']->getOption('matcher_class'));
         $this->assertEquals('Silex\\RedirectableUrlMatcher', $this->app['router']->getOption('matcher_base_class'));
+    }
+
+    public function testChainUrlGenerator()
+    {
+        $this->app->register($this->provider, array(
+            'routing.resource' => 'routing.xml'
+        ));
+
+        $this->app->match('/test_app_route')->bind('test_app_route');
+
+        $this->assertEquals('/test_config_route', $this->app['url_generator']->generate('test_config_route'));
+        $this->assertEquals('/test_app_route', $this->app['url_generator']->generate('test_app_route'));
     }
 }
