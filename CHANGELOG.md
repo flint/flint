@@ -1,3 +1,9 @@
+1.7.1 / 2014-04-08
+==================
+
+ * The SilexUrlGeneratorServiceProvider has been added to the application by default. 
+ * Port ChainUrlGenerator from Brick.
+
 1.7.0 / YYYY-MM-DD
 ==================
 
