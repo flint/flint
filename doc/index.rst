@@ -7,15 +7,7 @@ Symfony by bringing structure and conventions to Silex.
 Getting started
 ---------------
 
-To start a new project with Flint the easiest way is to use
-`Composer <http://getcomposer.org>`__ and
-`Flint-Skeleton <http://github.com/henrikbjorn/flint-skeleton>`__.
-
-.. code-block:: bash
-
-    $ php composer.phar create-project -s dev henrikbjorn/flint-skeleton my-flint-application
-
-Or if you are migrating from a Silex project you can change your
+To start using Flint the easiest way is to edit your
 ``composer.json`` file to require Flint and change the Application class
 that is used.
 
