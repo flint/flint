@@ -17,7 +17,7 @@ from subprocess import Popen, PIPE
 def get_version():
     """ Returns project version as string from 'git describe' command. """
     pipe = Popen('git describe --tags --always', stdout=PIPE, shell=True)
-    version = pipe.stdout.read()
+    version = pipe.stdout.read().strip()
 
     if version:
         return version
@@ -59,7 +59,7 @@ copyright = u'2013, Henrik Bjrnskov'
 # built documents.
 #
 # The short X.Y version.
-version = version
+version = get_version().lstrip('v')
 # The full version, including alpha/beta/rc tags.
 release = version
 
