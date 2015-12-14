@@ -130,7 +130,7 @@ baked right in.
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-        <route id="homepage" pattern="/">
+        <route id="homepage" path="/">
             <default key="_controller">Acme\\Controller\\DefaultController::indexAction</default>
         </route>
     </routes>
