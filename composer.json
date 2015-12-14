@@ -15,13 +15,13 @@
     "require" : {
         "php"          : "^5.3|^7.0",
         "flint/tacker" : "~0.4",
-        "silex/silex"  : "~1.1",
-        "twig/twig"    : "~1.10"
+        "silex/silex"  : "^1.0",
+        "twig/twig"    : "^1.0"
     },
 
     "require-dev" : {
-        "symfony/console" : "~2.2",
-        "symfony/yaml" : "~2.2"
+        "symfony/console" : "^2.2|^3.0",
+        "symfony/yaml" : "^2.2|^3.0"
     },
 
     "extra" : {
