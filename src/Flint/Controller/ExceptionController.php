@@ -22,7 +22,7 @@ class ExceptionController extends Controller
         $handler = new ExceptionHandler($this->pimple['debug']);
 
         if ($this->pimple['debug']) {
-            return $handler->createResponse($exception);
+            return $this->createResponse($handler, $exception);
         }
 
         $code = $exception->getStatusCode();
@@ -38,7 +38,7 @@ class ExceptionController extends Controller
             return new Response($contents, $code);
         }
 
-        return $handler->createResponse($exception);
+        return $this->createResponse($handler, $exception);
     }
 
     /**
@@ -70,5 +70,15 @@ class ExceptionController extends Controller
 
             return $template;
         }
+    }
+
+    private function createResponse(ExceptionHandler $handler, FlattenException $exception)
+    {
+        if (method_exists('getHtml', $handler)) {
+            return Response::create($handler->getHtml($exception), $exception->getStatusCode(), $exception->getHeaders());
+
+        }
+
+        return $handler->createResponse($exception);
     }
 }
