@@ -17,7 +17,7 @@ class ExceptionController extends Controller
      * @param FlattenException $exception
      * @param string           $format
      */
-    public function showAction(Request $request, FlattenException $exception, $format)
+    public function showAction(Request $request, FlattenException $exception, $format = 'html')
     {
         $handler = new ExceptionHandler($this->pimple['debug']);
 
@@ -74,7 +74,7 @@ class ExceptionController extends Controller
 
     private function createResponse(ExceptionHandler $handler, FlattenException $exception)
     {
-        if (method_exists('getHtml', $handler)) {
+        if (method_exists($handler, 'getHtml')) {
             return Response::create($handler->getHtml($exception), $exception->getStatusCode(), $exception->getHeaders());
 
         }
